@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DictionaryUtilityTests.cs" />
+    <Compile Include="EquatableClass.cs" />
+    <Compile Include="EquatableClassTests.cs" />
     <Compile Include="ObjectUtilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScopeTests.cs" />
