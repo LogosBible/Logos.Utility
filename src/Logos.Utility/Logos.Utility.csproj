@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DictionaryUtility.cs" />
+    <Compile Include="HashCodeUtility.cs" />
     <Compile Include="ObjectImpl.cs" />
     <Compile Include="ObjectUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
