@@ -47,8 +47,10 @@
     <Compile Include="DictionaryUtility.cs" />
     <Compile Include="DisposableService.cs" />
     <Compile Include="HashCodeUtility.cs" />
+    <Compile Include="IO\WrappingStream.cs" />
     <Compile Include="ObjectImpl.cs" />
     <Compile Include="ObjectUtility.cs" />
+    <Compile Include="Ownership.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
   </ItemGroup>
