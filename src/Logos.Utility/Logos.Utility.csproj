@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DictionaryUtility.cs" />
+    <Compile Include="DisposableService.cs" />
     <Compile Include="HashCodeUtility.cs" />
     <Compile Include="ObjectImpl.cs" />
     <Compile Include="ObjectUtility.cs" />
