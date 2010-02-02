@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logos.Utility", "src\Logos.Utility\Logos.Utility.csproj", "{F0BB7927-B2DB-4E37-9807-8E697CA09F32}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logos.Utility.Tests", "tests\Logos.Utility.Tests\Logos.Utility.Tests.csproj", "{F2594F76-66F9-4547-8B52-A89C0D48CE0E}"
