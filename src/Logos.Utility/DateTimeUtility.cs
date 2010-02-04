@@ -7,6 +7,7 @@ namespace Logos.Utility
 	/// <summary>
 	/// Provides methods for manipulating dates.
 	/// </summary>
+	/// <remarks>See <a href="http://code.logos.com/blog/2009/04/datetime_and_iso8601.html">DateTime and ISO8601</a>.</remarks>
 	public static class DateTimeUtility
 	{
 		/// <summary>
