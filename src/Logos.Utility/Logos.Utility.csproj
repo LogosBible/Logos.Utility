@@ -38,12 +38,14 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeUtility.cs" />
     <Compile Include="DictionaryUtility.cs" />
     <Compile Include="DisposableService.cs" />
     <Compile Include="DisposableUtility.cs" />
