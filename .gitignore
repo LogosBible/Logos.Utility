@@ -5,3 +5,4 @@ obj/
 # ignore user-specific options files
 *.suo
 *.csproj.user
+_ReSharper.*

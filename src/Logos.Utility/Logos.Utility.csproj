@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -36,25 +37,35 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Logos.Utility.XML</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeUtility.cs" />
     <Compile Include="DictionaryUtility.cs" />
     <Compile Include="DisposableService.cs" />
+    <Compile Include="DisposableUtility.cs" />
+    <Compile Include="EnvironmentUtility.cs" />
     <Compile Include="HashCodeUtility.cs" />
+    <Compile Include="IO\WrappingStream.cs" />
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="ObjectImpl.cs" />
     <Compile Include="ObjectUtility.cs" />
+    <Compile Include="Ownership.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
+    <Compile Include="Threading\ThreadUtility.cs" />
+    <Compile Include="Win32.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
