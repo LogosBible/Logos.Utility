@@ -1,0 +1,9 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Release" />
+  <Config name="Debug" binpathtype="Auto">
+    <assembly path="Logos.Utility.Tests\bin\Debug\Logos.Utility.Tests.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto">
+    <assembly path="Logos.Utility.Tests\bin\Release\Logos.Utility.Tests.dll" />
+  </Config>
+</NUnitProject>
