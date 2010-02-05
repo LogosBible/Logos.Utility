@@ -50,7 +50,7 @@ namespace Logos.Utility.Tests
 		public bool Equals(EquatableStruct other)
 		{
 			// this is the core implementation of Equals; other methods delegate to this
-			return other != null && m_text == other.m_text && m_count == other.m_count;
+			return m_text == other.m_text && m_count == other.m_count;
 		}
 
 		/// <summary>
