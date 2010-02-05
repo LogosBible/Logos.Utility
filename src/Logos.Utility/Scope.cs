@@ -12,12 +12,12 @@ namespace Logos.Utility
 		/// <summary>
 		/// Creates a <see cref="Scope" /> for the specified delegate.
 		/// </summary>
-		/// <param name="fnDispose">The delegate.</param>
+		/// <param name="onDispose">The delegate.</param>
 		/// <returns>An instance of <see cref="Scope" /> that calls the delegate when disposed.</returns>
-		/// <remarks>If fnDispose is null, the instance does nothing when disposed.</remarks>
-		public static Scope Create(Action fnDispose)
+		/// <remarks>If <paramref name="onDispose"/> is null, the instance does nothing when disposed.</remarks>
+		public static Scope Create(Action onDispose)
 		{
-			return new Scope(fnDispose);
+			return new Scope(onDispose);
 		}
 
 		/// <summary>
@@ -69,9 +69,9 @@ namespace Logos.Utility
 			}
 		}
 
-		private Scope(Action fnDispose)
+		private Scope(Action onDispose)
 		{
-			m_fnDispose = fnDispose;
+			m_fnDispose = onDispose;
 		}
 
 		Action m_fnDispose;
