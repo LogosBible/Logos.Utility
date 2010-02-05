@@ -52,6 +52,7 @@
     <Compile Include="DisposableService.cs" />
     <Compile Include="DisposableUtility.cs" />
     <Compile Include="EnvironmentUtility.cs" />
+    <Compile Include="ExpressionUtility.cs" />
     <Compile Include="HashCodeUtility.cs" />
     <Compile Include="IO\WrappingStream.cs" />
     <Compile Include="NativeMethods.cs" />
