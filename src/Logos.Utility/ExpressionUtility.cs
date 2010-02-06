@@ -17,7 +17,7 @@ namespace Logos.Utility
 		/// <returns>The name of the property.</returns>
 		public static string GetPropertyName<TProperty>(Expression<Func<TProperty>> expr)
 		{
-			var exprMember = expr.Body as MemberExpression;
+			MemberExpression exprMember = expr.Body as MemberExpression;
 			if (exprMember != null)
 				return exprMember.Member.Name;
 
@@ -35,7 +35,7 @@ namespace Logos.Utility
 		/// <code>(FileInfo info) => info.FullName</code> rather than <code>info => info.FullName</code>.</remarks>
 		public static string GetPropertyName<T, TProperty>(Expression<Func<T, TProperty>> expr)
 		{
-			var exprMember = expr.Body as MemberExpression;
+			MemberExpression exprMember = expr.Body as MemberExpression;
 			if (exprMember != null)
 				return exprMember.Member.Name;
 
