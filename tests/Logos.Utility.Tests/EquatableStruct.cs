@@ -45,7 +45,7 @@ namespace Logos.Utility.Tests
 		/// <summary>
 		/// Returns <c>true</c> if this object is equal to the specified <see cref="EquatableStruct"/>.
 		/// </summary>
-		/// <param name="obj">The <see cref="EquatableStruct"/> to compare to.</param>
+		/// <param name="other">The <see cref="EquatableStruct"/> to compare to.</param>
 		/// <returns><c>true</c> if this object is equal to the specified <see cref="EquatableStruct"/>; otherwise <c>false</c>.</returns>
 		public bool Equals(EquatableStruct other)
 		{
