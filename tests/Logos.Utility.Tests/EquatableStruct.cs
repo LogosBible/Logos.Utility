@@ -66,8 +66,8 @@ namespace Logos.Utility.Tests
 		/// <summary>
 		/// Determines whether two specified <see cref="EquatableStruct"/> objects have the same value.
 		/// </summary>
-		/// <param name="left">An <see cref="EquatableStruct"/> or a <c>null</c> reference.</param>
-		/// <param name="right">An <see cref="EquatableStruct"/> or a <c>null</c> reference.</param>
+		/// <param name="left">An <see cref="EquatableStruct"/>.</param>
+		/// <param name="right">An <see cref="EquatableStruct"/>.</param>
 		/// <returns><c>true</c> if the value of <paramref name="left"/> is the same as the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
 		public static bool operator ==(EquatableStruct left, EquatableStruct right)
 		{
@@ -77,8 +77,8 @@ namespace Logos.Utility.Tests
 		/// <summary>
 		/// Determines whether two specified <see cref="EquatableStruct"/> objects have different value.
 		/// </summary>
-		/// <param name="left">An <see cref="EquatableStruct"/> or a <c>null</c> reference.</param>
-		/// <param name="right">An <see cref="EquatableStruct"/> or a <c>null</c> reference.</param>
+		/// <param name="left">An <see cref="EquatableStruct"/>.</param>
+		/// <param name="right">An <see cref="EquatableStruct"/>.</param>
 		/// <returns><c>true</c> if the value of <paramref name="left"/> is different from the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
 		public static bool operator !=(EquatableStruct left, EquatableStruct right)
 		{
