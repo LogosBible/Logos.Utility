@@ -5,7 +5,7 @@ namespace Logos.Utility
 	/// Provides methods for manipulating and creating hash codes.
 	/// </summary>
 	/// <remarks>
-	/// <para>This code is based on Bob Jenkins' public domain<a href="http://burtleburtle.net/bob/c/lookup3.c">lookup3.c</a> code.</para>
+	/// <para>This code is based on Bob Jenkins' public domain <a href="http://burtleburtle.net/bob/c/lookup3.c">lookup3.c</a> code.</para>
 	/// <para>This work is hereby released into the Public Domain. To view a copy of the public domain dedication,
 	/// visit http://creativecommons.org/licenses/publicdomain/ or send a letter to
 	/// Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.</para>
