@@ -6,3 +6,8 @@ obj/
 *.suo
 *.csproj.user
 _ReSharper.*
+*.resharper.user
+
+# ignore NUnit output
+tests/Logos.Utility.VisualState.xml
+tests/TestResult.xml

@@ -7,7 +7,7 @@ namespace Logos.Utility
 	/// Provides methods for manipulating disposable objects.
 	/// </summary>
 	/// <remarks>See <a href="http://code.logos.com/blog/2008/02/disposed_objects.html">Disposed objects</a> and
-	/// <see href="http://code.logos.com/blog/2008/02/another_extension_method_dispo.html">Another extension method: DisposeAfter</see>.</remarks>
+	/// <a href="http://code.logos.com/blog/2008/02/another_extension_method_dispo.html">Another extension method: DisposeAfter</a>.</remarks>
 	public static class DisposableUtility
 	{
 		/// <summary>

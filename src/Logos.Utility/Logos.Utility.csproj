@@ -56,6 +56,7 @@
     <Compile Include="DisposableService.cs" />
     <Compile Include="DisposableUtility.cs" />
     <Compile Include="EnvironmentUtility.cs" />
+    <Compile Include="ExpressionUtility.cs" />
     <Compile Include="HashCodeUtility.cs" />
     <Compile Include="IO\WrappingStream.cs" />
     <Compile Include="NativeMethods.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Ownership.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
+    <Compile Include="Security\Cryptography\Salsa20.cs" />
     <Compile Include="Threading\ThreadUtility.cs" />
     <Compile Include="Win32.cs" />
   </ItemGroup>

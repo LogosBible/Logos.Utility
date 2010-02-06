@@ -45,12 +45,12 @@ namespace Logos.Utility.Tests
 		/// <summary>
 		/// Returns <c>true</c> if this object is equal to the specified <see cref="EquatableStruct"/>.
 		/// </summary>
-		/// <param name="obj">The <see cref="EquatableStruct"/> to compare to.</param>
+		/// <param name="other">The <see cref="EquatableStruct"/> to compare to.</param>
 		/// <returns><c>true</c> if this object is equal to the specified <see cref="EquatableStruct"/>; otherwise <c>false</c>.</returns>
 		public bool Equals(EquatableStruct other)
 		{
 			// this is the core implementation of Equals; other methods delegate to this
-			return other != null && m_text == other.m_text && m_count == other.m_count;
+			return m_text == other.m_text && m_count == other.m_count;
 		}
 
 		/// <summary>
@@ -66,8 +66,8 @@ namespace Logos.Utility.Tests
 		/// <summary>
 		/// Determines whether two specified <see cref="EquatableStruct"/> objects have the same value.
 		/// </summary>
-		/// <param name="left">An <see cref="EquatableStruct"/> or a <c>null</c> reference.</param>
-		/// <param name="right">An <see cref="EquatableStruct"/> or a <c>null</c> reference.</param>
+		/// <param name="left">An <see cref="EquatableStruct"/>.</param>
+		/// <param name="right">An <see cref="EquatableStruct"/>.</param>
 		/// <returns><c>true</c> if the value of <paramref name="left"/> is the same as the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
 		public static bool operator ==(EquatableStruct left, EquatableStruct right)
 		{
@@ -77,8 +77,8 @@ namespace Logos.Utility.Tests
 		/// <summary>
 		/// Determines whether two specified <see cref="EquatableStruct"/> objects have different value.
 		/// </summary>
-		/// <param name="left">An <see cref="EquatableStruct"/> or a <c>null</c> reference.</param>
-		/// <param name="right">An <see cref="EquatableStruct"/> or a <c>null</c> reference.</param>
+		/// <param name="left">An <see cref="EquatableStruct"/>.</param>
+		/// <param name="right">An <see cref="EquatableStruct"/>.</param>
 		/// <returns><c>true</c> if the value of <paramref name="left"/> is different from the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
 		public static bool operator !=(EquatableStruct left, EquatableStruct right)
 		{
