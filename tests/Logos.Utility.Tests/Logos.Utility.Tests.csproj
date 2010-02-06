@@ -58,6 +58,7 @@
     <Compile Include="EquatableStructTests.cs" />
     <Compile Include="ExpressionUtilityTests.cs" />
     <Compile Include="HashCodeUtilityTests.cs" />
+    <Compile Include="HttpWebRequestUtilityTests.cs" />
     <Compile Include="ObjectUtilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Salsa20Tests.cs" />
