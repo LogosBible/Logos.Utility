@@ -52,6 +52,7 @@
     <Compile Include="DateTimeUtilityTests.cs" />
     <Compile Include="DictionaryUtilityTests.cs" />
     <Compile Include="DisposableServiceTests.cs" />
+    <Compile Include="EnumerableUtilityTests.cs" />
     <Compile Include="EquatableClass.cs" />
     <Compile Include="EquatableClassTests.cs" />
     <Compile Include="EquatableStruct.cs" />
