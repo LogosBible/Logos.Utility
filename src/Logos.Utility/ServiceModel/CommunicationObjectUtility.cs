@@ -20,43 +20,50 @@ namespace Logos.Utility.ServiceModel
 			if (client == null)
 				throw new ArgumentNullException("client");
 
-			// We need to Close the CommunicationObject if it's not in the Faulted state, but Abort it otherwise. Additionally.
-			// if Close throws an expected exception, we swallow that exception and Abort the operation.
-			// For more details, see:
-			//   http://msdn2.microsoft.com/en-us/library/aa355056.aspx
-			//   http://msdn2.microsoft.com/en-us/library/aa354510.aspx
-			//   http://bloggingabout.net/blogs/erwyn/archive/2006/12/09/WCF-Service-Proxy-Helper.aspx
-			//   http://blogs.breezetraining.com.au/mickb/2006/12/19/GreatArticleOnWCF.aspx
-			return Scope.Create(delegate
+			return Scope.Create(() => client.CloseOrAbort());
+		}
+
+		/// <summary>
+		/// Closes the <see cref="ICommunicationObject"/> if it's not in the Faulted state, but Aborts it otherwise.
+		/// Additionally, if Close throws an expected exception, that exception is swallowed and the operation is Aborted.
+		/// </summary>
+		/// <param name="client">The <see cref="ICommunicationObject"/> on which <see cref="ICommunicationObject.Close()"/>
+		/// or <see cref="ICommunicationObject.Abort()"/> will be called.</param>
+		/// <remarks>For more details, see:
+		/// http://msdn2.microsoft.com/en-us/library/aa355056.aspx
+		/// http://msdn2.microsoft.com/en-us/library/aa354510.aspx
+		/// http://bloggingabout.net/blogs/erwyn/archive/2006/12/09/WCF-Service-Proxy-Helper.aspx
+		/// http://blogs.breezetraining.com.au/mickb/2006/12/19/GreatArticleOnWCF.aspx
+		/// </remarks>
+		public static void CloseOrAbort(this ICommunicationObject client)
+		{
+			if (client.State != CommunicationState.Faulted)
 			{
-				if (client.State != CommunicationState.Faulted)
+				// client is in non-faulted state; we can attempt to Close it
+				try
 				{
-					// client is in non-faulted state; we can attempt to Close it
-					try
-					{
-						client.Close();
-					}
-					catch (CommunicationException)
-					{
-						client.Abort();
-					}
-					catch (TimeoutException)
-					{
-						client.Abort();
-					}
-					catch (Exception)
-					{
-						// unexpected exception--still Abort the client, but re-throw it
-						client.Abort();
-						throw;
-					}
+					client.Close();
 				}
-				else
+				catch (CommunicationException)
 				{
-					// client has already failed; have to abort
 					client.Abort();
 				}
-			});
+				catch (TimeoutException)
+				{
+					client.Abort();
+				}
+				catch (Exception)
+				{
+					// unexpected exception--still Abort the client, but re-throw it
+					client.Abort();
+					throw;
+				}
+			}
+			else
+			{
+				// client has already failed; have to abort
+				client.Abort();
+			}
 		}
 	}
 }
