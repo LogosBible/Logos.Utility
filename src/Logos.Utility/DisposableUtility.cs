@@ -6,8 +6,6 @@ namespace Logos.Utility
 	/// <summary>
 	/// Provides methods for manipulating disposable objects.
 	/// </summary>
-	/// <remarks>See <a href="http://code.logos.com/blog/2008/02/disposed_objects.html">Disposed objects</a> and
-	/// <a href="http://code.logos.com/blog/2008/02/another_extension_method_dispo.html">Another extension method: DisposeAfter</a>.</remarks>
 	public static class DisposableUtility
 	{
 		/// <summary>
@@ -32,6 +30,7 @@ namespace Logos.Utility
 		/// <param name="d">The object to dispose.</param>
 		/// <param name="fn">The delegate to execute before disposing the object.</param>
 		/// <returns>The value returned by the delegate.</returns>
+		/// <remarks>See <a href="http://code.logos.com/blog/2008/02/another_extension_method_dispo.html">Another extension method: DisposeAfter</a>.</remarks>
 		public static TOutput DisposeAfter<TInput, TOutput>(this TInput d, Func<TInput, TOutput> fn) where TInput : IDisposable
 		{
 			using (d)
@@ -46,6 +45,7 @@ namespace Logos.Utility
 		/// <param name="d">The object to dispose.</param>
 		/// <param name="fn">The delegate to execute before disposing the object.</param>
 		/// <returns>The value returned by the delegate.</returns>
+		/// <remarks>See <a href="http://code.logos.com/blog/2008/02/another_extension_method_dispo.html">Another extension method: DisposeAfter</a>.</remarks>
 		public static TOutput DisposeAfter<TInput, TOutput>(this TInput d, Func<TOutput> fn) where TInput : IDisposable
 		{
 			using (d)
