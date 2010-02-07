@@ -56,6 +56,7 @@
     <Compile Include="DateTimeUtilityTests.cs" />
     <Compile Include="DictionaryUtilityTests.cs" />
     <Compile Include="DisposableServiceTests.cs" />
+    <Compile Include="EnumerableUtilityTests.cs" />
     <Compile Include="EquatableClass.cs" />
     <Compile Include="EquatableClassTests.cs" />
     <Compile Include="EquatableStruct.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="ExpressionUtilityTests.cs" />
     <Compile Include="HashCodeUtilityTests.cs" />
     <Compile Include="HttpWebRequestUtilityTests.cs" />
+    <Compile Include="NotifyPropertyChangedUtilityTests.cs" />
     <Compile Include="ObjectUtilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Salsa20Tests.cs" />

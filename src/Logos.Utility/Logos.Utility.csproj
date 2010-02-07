@@ -54,10 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComponentModel\NotifyPropertyChangedUtility.cs" />
     <Compile Include="DateTimeUtility.cs" />
     <Compile Include="DictionaryUtility.cs" />
     <Compile Include="DisposableService.cs" />
     <Compile Include="DisposableUtility.cs" />
+    <Compile Include="EnumerableUtility.cs" />
     <Compile Include="EnvironmentUtility.cs" />
     <Compile Include="ExpressionUtility.cs" />
     <Compile Include="HashCodeUtility.cs" />
