@@ -11,6 +11,17 @@ namespace Logos.Utility
 	public static class EnumerableUtility
 	{
 		/// <summary>
+		/// Returns the source sequence, or an empty sequence if <paramref name="source"/> is <c>null</c>.
+		/// </summary>
+		/// <param name="source">The source sequence.</param>
+		/// <returns>The source sequence, or an empty sequence if <paramref name="source"/> is <c>null</c>.</returns>
+		/// <remarks>See <a href="http://code.logos.com/blog/2008/03/emptyifnull.html">EmptyIfNull</a>.</remarks>
+		public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> source)
+		{
+			return source ?? Enumerable.Empty<T>();
+		}
+
+		/// <summary>
 		/// Computes the sum of a sequence of <see cref="Nullable{Decimal}"/> values.
 		/// </summary>
 		/// <param name="source">A sequence of <see cref="Nullable{Decimal}"/> values to calculate the sum of.</param>

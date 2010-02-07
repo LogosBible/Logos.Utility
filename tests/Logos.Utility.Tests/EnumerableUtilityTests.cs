@@ -9,6 +9,18 @@ namespace Logos.Utility.Tests
 	[TestFixture]
 	public class EnumerableUtilityTests
 	{
+		[Test]
+		public void EmptyIfNullNull()
+		{
+			CollectionAssert.AreEqual(new int[0], ((IEnumerable<int>) null).EmptyIfNull());
+		}
+
+		[Test]
+		public void EmptyIfNullNonNull()
+		{
+			CollectionAssert.AreEqual(new[] { 1, 2 }, (new[] { 1, 2 }).EmptyIfNull());
+		}
+
 		const int NullInt = 1234567;
 
 		[TestCase(new[] { 1, 2, 3, 4, 5 }, 15)]
