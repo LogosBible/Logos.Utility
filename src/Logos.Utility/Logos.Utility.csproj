@@ -71,6 +71,7 @@
     <Compile Include="Scope.cs" />
     <Compile Include="Security\Cryptography\Salsa20.cs" />
     <Compile Include="ServiceModel\CommunicationObjectUtility.cs" />
+    <Compile Include="Threading\AsyncResult.cs" />
     <Compile Include="Threading\ThreadUtility.cs" />
     <Compile Include="Win32.cs" />
   </ItemGroup>
