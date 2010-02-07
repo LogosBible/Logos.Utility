@@ -6,7 +6,7 @@ namespace Logos.Utility
 	/// <summary>
 	/// Executes the specified delegate when disposed.
 	/// </summary>
-    /// <remarks>See <a href="http://code.logos.com/blog/2008/08/leverage_using_blocks_with_scope.html">Leverage using blocks with Scope</a>.</remarks>
+	/// <remarks>See <a href="http://code.logos.com/blog/2008/08/leverage_using_blocks_with_scope.html">Leverage using blocks with Scope</a>.</remarks>
 	public sealed class Scope : IDisposable
 	{
 		/// <summary>
