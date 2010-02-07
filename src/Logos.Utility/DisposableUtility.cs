@@ -50,29 +50,5 @@ namespace Logos.Utility
 			using (d)
 				return fn();
 		}
-
-		/// <summary>
-		/// Disposes the specified object after executing the specified delegate.
-		/// </summary>
-		/// <typeparam name="T">The type of the input</typeparam>
-		/// <param name="d">The object to dispose.</param>
-		/// <param name="fn">The delegate to execute before disposing the object.</param>
-		public static void DisposeAfter<T>(this T d, Action<T> fn) where T : IDisposable
-		{
-			using (d)
-				fn(d);
-		}
-
-		/// <summary>
-		/// Disposes the specified object after executing the specified delegate.
-		/// </summary>
-		/// <typeparam name="T">The type of the input</typeparam>
-		/// <param name="d">The object to dispose.</param>
-		/// <param name="fn">The delegate to execute before disposing the object.</param>
-		public static void DisposeAfter<T>(this T d, Action fn) where T : IDisposable
-		{
-			using (d)
-				fn();
-		}
 	}
 }
