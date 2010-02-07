@@ -14,6 +14,7 @@ namespace Logos.Utility
 		/// Disposes and nulls the specified object.
 		/// </summary>
 		/// <param name="obj">The object to dispose and null.</param>
+		/// <remarks>See <a href="http://code.logos.com/blog/2008/02/disposed_objects.html">Disposed objects</a>.</remarks>
 		public static void Dispose<T>(ref T obj) where T : class, IDisposable
 		{
 			if (obj != null)
