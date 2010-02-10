@@ -21,19 +21,14 @@ namespace Logos.Utility.Threading
 		{
 			// create result object that can hold the asynchronously-computed value
 			TaskCompletionSource<T> result = new TaskCompletionSource<T>(state);
-			if (callback != null)
-				result.Task.ContinueWith(t => callback(t));
 
 			// set the result (or failure) when the value is known
 			task.ContinueWith(t =>
 				{
-					if (t.IsFaulted)
-						result.SetException(t.Exception);
-					else if (t.IsCanceled)
-						result.SetCanceled();
-					else
-						result.SetResult(t.Result);
-				});
+                    result.SetFromTask(t);
+                    if (callback != null)
+                        callback(result.Task);
+                });
 
 			// the result's task functions as the IAsyncResult APM return value
 			return result.Task;
