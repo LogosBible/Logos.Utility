@@ -19,16 +19,19 @@ namespace Logos.Utility.Threading
 		/// <returns>An <see cref="IAsyncResult"/> object that can be returned from an APM-style BeginXxx method.</returns>
 		public static IAsyncResult CreateAsyncResult<T>(this Task<T> task, AsyncCallback callback, object state)
 		{
+			if (task == null)
+				throw new ArgumentNullException("task");
+
 			// create result object that can hold the asynchronously-computed value
 			TaskCompletionSource<T> result = new TaskCompletionSource<T>(state);
 
 			// set the result (or failure) when the value is known
 			task.ContinueWith(t =>
 				{
-                    result.SetFromTask(t);
-                    if (callback != null)
-                        callback(result.Task);
-                });
+					result.SetFromTask(t);
+					if (callback != null)
+						callback(result.Task);
+				});
 
 			// the result's task functions as the IAsyncResult APM return value
 			return result.Task;
