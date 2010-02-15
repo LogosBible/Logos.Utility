@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DelegateUtilityTests.cs" />
     <Compile Include="ReadOnlyStreamTests.cs" />
     <Compile Include="RebasedStreamTests.cs" />
     <Compile Include="DateTimeUtilityTests.cs" />
