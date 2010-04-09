@@ -16,9 +16,8 @@ namespace Logos.Utility.Tests
 			Random random = new Random(1);
 
 			var data = new Triple[100000];
-			for (var i = 0; i < data.Length; i++)
-				data[i] = new Triple(random.Next(100), random.Next(100), random.Next());
-			Console.WriteLine("done.");
+			for (int index = 0; index < data.Length; index++)
+				data[index] = new Triple(random.Next(100), random.Next(100), random.Next());
 
 			var sorted1 = data.OrderBy(x => x.First);
 			var sorted2 = data.LazyOrderBy(x => x.First);
@@ -31,9 +30,8 @@ namespace Logos.Utility.Tests
 			Random random = new Random(2);
 
 			var data = new Triple[100000];
-			for (var i = 0; i < data.Length; i++)
-				data[i] = new Triple(random.Next(100), random.Next(100), random.Next());
-			Console.WriteLine("done.");
+			for (int index = 0; index < data.Length; index++)
+				data[index] = new Triple(random.Next(100), random.Next(100), random.Next());
 
 			var sorted1 = data.OrderBy(x => x.First).ThenBy(x => x.Second);
 			var sorted2 = data.LazyOrderBy(x => x.First).ThenBy(x => x.Second);
@@ -46,9 +44,8 @@ namespace Logos.Utility.Tests
 			Random random = new Random(3);
 
 			var data = new Triple[100000];
-			for (var i = 0; i < data.Length; i++)
-				data[i] = new Triple(random.Next(100), random.Next(100), random.Next());
-			Console.WriteLine("done.");
+			for (int index = 0; index < data.Length; index++)
+				data[index] = new Triple(random.Next(100), random.Next(100), random.Next());
 
 			var sorted1 = data.OrderBy(x => x.First).ThenByDescending(x => x.Second);
 			var sorted2 = data.LazyOrderBy(x => x.First).ThenByDescending(x => x.Second);
@@ -61,9 +58,8 @@ namespace Logos.Utility.Tests
 			Random random = new Random(4);
 
 			var data = new Triple[100000];
-			for (var i = 0; i < data.Length; i++)
-				data[i] = new Triple(random.Next(100), random.Next(100), random.Next());
-			Console.WriteLine("done.");
+			for (int index = 0; index < data.Length; index++)
+				data[index] = new Triple(random.Next(100), random.Next(100), random.Next());
 
 			var sorted1 = data.OrderByDescending(x => x.First);
 			var sorted2 = data.LazyOrderByDescending(x => x.First);
@@ -76,9 +72,8 @@ namespace Logos.Utility.Tests
 			Random random = new Random(5);
 
 			var data = new Triple[100000];
-			for (var i = 0; i < data.Length; i++)
-				data[i] = new Triple(random.Next(100), random.Next(100), random.Next());
-			Console.WriteLine("done.");
+			for (int index = 0; index < data.Length; index++)
+				data[index] = new Triple(random.Next(100), random.Next(100), random.Next());
 
 			var sorted1 = data.OrderByDescending(x => x.First).ThenBy(x => x.Second);
 			var sorted2 = data.LazyOrderByDescending(x => x.First).ThenBy(x => x.Second);
@@ -91,9 +86,8 @@ namespace Logos.Utility.Tests
 			Random random = new Random(6);
 
 			var data = new Triple[100000];
-			for (var i = 0; i < data.Length; i++)
-				data[i] = new Triple(random.Next(100), random.Next(100), random.Next());
-			Console.WriteLine("done.");
+			for (int index = 0; index < data.Length; index++)
+				data[index] = new Triple(random.Next(100), random.Next(100), random.Next());
 
 			var sorted1 = data.OrderByDescending(x => x.First).ThenByDescending(x => x.Second);
 			var sorted2 = data.LazyOrderByDescending(x => x.First).ThenByDescending(x => x.Second);
@@ -106,9 +100,8 @@ namespace Logos.Utility.Tests
 			Random random = new Random(7);
 
 			var data = new Triple[100000];
-			for (var i = 0; i < data.Length; i++)
-				data[i] = new Triple(random.Next(), random.Next(100), random.Next(100));
-			Console.WriteLine("done.");
+			for (int index = 0; index < data.Length; index++)
+				data[index] = new Triple(random.Next(), random.Next(100), random.Next(100));
 
 			var sorted1 = data.OrderBy(x => x, new TripleComparer());
 			var sorted2 = data.LazyOrderBy(x => x, new TripleComparer());
@@ -121,9 +114,8 @@ namespace Logos.Utility.Tests
 			Random random = new Random(8);
 
 			var data = new Triple[100000];
-			for (var i = 0; i < data.Length; i++)
-				data[i] = new Triple(random.Next(), random.Next(100), random.Next(100));
-			Console.WriteLine("done.");
+			for (int index = 0; index < data.Length; index++)
+				data[index] = new Triple(random.Next(), random.Next(100), random.Next(100));
 
 			var sorted1 = data.OrderByDescending(x => x, new TripleComparer());
 			var sorted2 = data.LazyOrderByDescending(x => x, new TripleComparer());
