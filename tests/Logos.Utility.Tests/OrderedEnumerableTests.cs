@@ -22,7 +22,6 @@ namespace Logos.Utility.Tests
 
 			var sorted1 = data.OrderBy(x => x.First);
 			var sorted2 = data.LazyOrderBy(x => x.First);
-
 			CollectionAssert.AreEqual(sorted1, sorted2);
 		}
 
@@ -38,7 +37,6 @@ namespace Logos.Utility.Tests
 
 			var sorted1 = data.OrderBy(x => x.First).ThenBy(x => x.Second);
 			var sorted2 = data.LazyOrderBy(x => x.First).ThenBy(x => x.Second);
-
 			CollectionAssert.AreEqual(sorted1, sorted2);
 		}
 
@@ -54,7 +52,6 @@ namespace Logos.Utility.Tests
 
 			var sorted1 = data.OrderBy(x => x.First).ThenByDescending(x => x.Second);
 			var sorted2 = data.LazyOrderBy(x => x.First).ThenByDescending(x => x.Second);
-
 			CollectionAssert.AreEqual(sorted1, sorted2);
 		}
 
@@ -70,7 +67,6 @@ namespace Logos.Utility.Tests
 
 			var sorted1 = data.OrderByDescending(x => x.First);
 			var sorted2 = data.LazyOrderByDescending(x => x.First);
-
 			CollectionAssert.AreEqual(sorted1, sorted2);
 		}
 
@@ -86,7 +82,6 @@ namespace Logos.Utility.Tests
 
 			var sorted1 = data.OrderByDescending(x => x.First).ThenBy(x => x.Second);
 			var sorted2 = data.LazyOrderByDescending(x => x.First).ThenBy(x => x.Second);
-
 			CollectionAssert.AreEqual(sorted1, sorted2);
 		}
 
@@ -102,7 +97,6 @@ namespace Logos.Utility.Tests
 
 			var sorted1 = data.OrderByDescending(x => x.First).ThenByDescending(x => x.Second);
 			var sorted2 = data.LazyOrderByDescending(x => x.First).ThenByDescending(x => x.Second);
-
 			CollectionAssert.AreEqual(sorted1, sorted2);
 		}
 
@@ -118,7 +112,6 @@ namespace Logos.Utility.Tests
 
 			var sorted1 = data.OrderBy(x => x, new TripleComparer());
 			var sorted2 = data.LazyOrderBy(x => x, new TripleComparer());
-
 			CollectionAssert.AreEqual(sorted1, sorted2);
 		}
 
@@ -133,8 +126,7 @@ namespace Logos.Utility.Tests
 			Console.WriteLine("done.");
 
 			var sorted1 = data.OrderByDescending(x => x, new TripleComparer());
-			var sorted2 = data.OrderByDescending(x => x, new TripleComparer());
-
+			var sorted2 = data.LazyOrderByDescending(x => x, new TripleComparer());
 			CollectionAssert.AreEqual(sorted1, sorted2);
 		}
 
