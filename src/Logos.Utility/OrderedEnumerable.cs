@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace Logos.Utility
 {
+	// OrderedEnumerable<TSource> implements a lazy "OrderBy" for IEnumerable<TSource>. This class is instantiated by the
+	// EnumerableUtility.LazyOrder* methods.
+	// For more information, see http://code.logos.com/blog/2010/04/a_truly_lazy_orderby_in_linq.html
 	internal class OrderedEnumerable<TSource> : IOrderedEnumerable<TSource>
 	{
 		// Creates a new OrderedEnumerable that will sort 'source' according to 'ordering'.
