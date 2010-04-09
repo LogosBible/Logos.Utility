@@ -138,6 +138,46 @@ namespace Logos.Utility.Tests
 			CollectionAssert.AreEqual(sorted1, sorted2);
 		}
 
+		[Test]
+		public void AscendingNullArguments()
+		{
+			Assert.Throws<ArgumentNullException>(() => ((IEnumerable<int>) null).OrderBy(x => x));
+			Assert.Throws<ArgumentNullException>(() => Enumerable.Range(0, 10).OrderBy((Func<int, int>) null));
+		}
+
+		[Test]
+		public void DescendingNullArguments()
+		{
+			Assert.Throws<ArgumentNullException>(() => ((IEnumerable<int>) null).OrderByDescending(x => x));
+			Assert.Throws<ArgumentNullException>(() => Enumerable.Range(0, 10).OrderByDescending((Func<int, int>) null));
+		}
+
+		[Test]
+		public void DefaultComparerAscending()
+		{
+			Random random = new Random(9);
+			int[] numbers = new int[100000];
+			for (int index = 0; index < numbers.Length; index++)
+				numbers[index] = random.Next();
+
+			var sorted1 = numbers.OrderBy(x => x, null);
+			var sorted2 = numbers.LazyOrderBy(x => x, null);
+			CollectionAssert.AreEqual(sorted1, sorted2);
+		}
+
+		[Test]
+		public void DefaultComparerDescending()
+		{
+			Random random = new Random(9);
+			int[] numbers = new int[100000];
+			for (int index = 0; index < numbers.Length; index++)
+				numbers[index] = random.Next();
+
+			var sorted1 = numbers.OrderByDescending(x => x, null);
+			var sorted2 = numbers.LazyOrderByDescending(x => x, null);
+			CollectionAssert.AreEqual(sorted1, sorted2);
+		}
+
 		// The Triple struct can be used to verify that the sort is stable by sorting by the First (and Second)
 		// properties, then using the Third property to verify that objects are in the right order.
 		[DebuggerDisplay("F={m_first} S={m_second} T={m_third}")]

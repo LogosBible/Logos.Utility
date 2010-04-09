@@ -31,7 +31,7 @@ namespace Logos.Utility
 		/// elements that are requested from the return value.</remarks>
 		public static IOrderedEnumerable<TSource> LazyOrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
 		{
-			return LazyOrderBy(source, keySelector, Comparer<TKey>.Default);
+			return LazyOrderBy(source, keySelector, null, false);
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace Logos.Utility
 		/// elements that are requested from the return value.</remarks>
 		public static IOrderedEnumerable<TSource> LazyOrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
 		{
-			return new OrderedEnumerable<TSource>(source, new ElementComparer<TSource, TKey>(keySelector, comparer, false, null));
+			return LazyOrderBy(source, keySelector, comparer, false);
 		}
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace Logos.Utility
 		/// elements that are requested from the return value.</remarks>
 		public static IOrderedEnumerable<TSource> LazyOrderByDescending<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
 		{
-			return LazyOrderByDescending(source, keySelector, Comparer<TKey>.Default);
+			return LazyOrderBy(source, keySelector, null, true);
 		}
 
 		/// <summary>
@@ -72,7 +72,17 @@ namespace Logos.Utility
 		/// elements that are requested from the return value.</remarks>
 		public static IOrderedEnumerable<TSource> LazyOrderByDescending<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
 		{
-			return new OrderedEnumerable<TSource>(source, new ElementComparer<TSource, TKey>(keySelector, comparer, true, null));
+			return LazyOrderBy(source, keySelector, comparer, true);
+		}
+
+		private static IOrderedEnumerable<TSource> LazyOrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer, bool descending)
+		{
+			if (source == null)
+				throw new ArgumentNullException("source");
+			if (keySelector == null)
+				throw new ArgumentNullException("keySelector");
+
+			return new OrderedEnumerable<TSource>(source, new ElementComparer<TSource, TKey>(keySelector, comparer ?? Comparer<TKey>.Default, descending, null));
 		}
 
 		/// <summary>
