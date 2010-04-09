@@ -60,6 +60,7 @@
     <Compile Include="DictionaryUtility.cs" />
     <Compile Include="DisposableService.cs" />
     <Compile Include="DisposableUtility.cs" />
+    <Compile Include="ElementComparer.cs" />
     <Compile Include="EnumerableUtility.cs" />
     <Compile Include="EnvironmentUtility.cs" />
     <Compile Include="ExpressionUtility.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Net\HttpWebRequestUtility.cs" />
     <Compile Include="ObjectImpl.cs" />
     <Compile Include="ObjectUtility.cs" />
+    <Compile Include="OrderedEnumerable.cs" />
     <Compile Include="Ownership.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scope.cs" />
