@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ClonableClass.cs" />
     <Compile Include="DelegateUtilityTests.cs" />
+    <Compile Include="OrderedEnumerableTests.cs" />
     <Compile Include="ReadOnlyStreamTests.cs" />
     <Compile Include="RebasedStreamTests.cs" />
     <Compile Include="DateTimeUtilityTests.cs" />

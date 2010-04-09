@@ -22,6 +22,60 @@ namespace Logos.Utility
 		}
 
 		/// <summary>
+		/// Sorts the elements of a sequence in ascending order according to a key.
+		/// </summary>
+		/// <param name="source">A sequence of values to order.</param>
+		/// <param name="keySelector">A function to extract a key from an element.</param>
+		/// <returns>An <see cref="IEnumerable{TSource}"/> whose elements are sorted according to a key.</returns>
+		/// <remarks>This method only sorts as much of <paramref name="source"/> as is required to yield the
+		/// elements that are requested from the return value.</remarks>
+		public static IOrderedEnumerable<TSource> LazyOrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+		{
+			return LazyOrderBy(source, keySelector, Comparer<TKey>.Default);
+		}
+
+		/// <summary>
+		/// Sorts the elements of a sequence in ascending order according to a key.
+		/// </summary>
+		/// <param name="source">A sequence of values to order.</param>
+		/// <param name="keySelector">A function to extract a key from an element.</param>
+		/// <param name="comparer">An <see cref="IComparer{T}"/> to compare keys.</param>
+		/// <returns>An <see cref="IEnumerable{TSource}"/> whose elements are sorted according to a key.</returns>
+		/// <remarks>This method only sorts as much of <paramref name="source"/> as is required to yield the
+		/// elements that are requested from the return value.</remarks>
+		public static IOrderedEnumerable<TSource> LazyOrderBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
+		{
+			return new OrderedEnumerable<TSource>(source, new ElementComparer<TSource, TKey>(keySelector, comparer, false, null));
+		}
+
+		/// <summary>
+		/// Sorts the elements of a sequence in descending order according to a key.
+		/// </summary>
+		/// <param name="source">A sequence of values to order.</param>
+		/// <param name="keySelector">A function to extract a key from an element.</param>
+		/// <returns>An <see cref="IEnumerable{TSource}"/> whose elements are sorted according to a key.</returns>
+		/// <remarks>This method only sorts as much of <paramref name="source"/> as is required to yield the
+		/// elements that are requested from the return value.</remarks>
+		public static IOrderedEnumerable<TSource> LazyOrderByDescending<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+		{
+			return LazyOrderByDescending(source, keySelector, Comparer<TKey>.Default);
+		}
+
+		/// <summary>
+		/// Sorts the elements of a sequence in descending order according to a key.
+		/// </summary>
+		/// <param name="source">A sequence of values to order.</param>
+		/// <param name="keySelector">A function to extract a key from an element.</param>
+		/// <param name="comparer">An <see cref="IComparer{T}"/> to compare keys.</param>
+		/// <returns>An <see cref="IEnumerable{TSource}"/> whose elements are sorted according to a key.</returns>
+		/// <remarks>This method only sorts as much of <paramref name="source"/> as is required to yield the
+		/// elements that are requested from the return value.</remarks>
+		public static IOrderedEnumerable<TSource> LazyOrderByDescending<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer)
+		{
+			return new OrderedEnumerable<TSource>(source, new ElementComparer<TSource, TKey>(keySelector, comparer, true, null));
+		}
+
+		/// <summary>
 		/// Computes the sum of a sequence of <see cref="Nullable{Decimal}"/> values.
 		/// </summary>
 		/// <param name="source">A sequence of <see cref="Nullable{Decimal}"/> values to calculate the sum of.</param>
