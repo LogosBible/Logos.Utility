@@ -129,7 +129,6 @@ namespace Logos.Utility
 			return source.Aggregate((long?) 0, (sum, value) => { return checked(sum + value); });
 		}
 
-
 		/// <summary>
 		/// Computes the sum of a sequence of <see cref="Nullable{Single}"/> values.
 		/// </summary>
