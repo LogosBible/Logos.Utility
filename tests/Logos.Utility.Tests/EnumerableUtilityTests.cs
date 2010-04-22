@@ -70,6 +70,46 @@ namespace Logos.Utility.Tests
 			Assert.That((new float?[] { float.MinValue, float.MinValue }).NullableSum(), Is.EqualTo(float.NegativeInfinity));
 		}
 
+		[Test]
+		public void WhereNotNullClassNullArgument()
+		{
+			IEnumerable<string> input = null;
+			Assert.Throws<ArgumentNullException>(() => input.WhereNotNull());
+		}
+
+		[Test]
+		public void WhereNotNullClass()
+		{
+			IEnumerable<string> input = new[] { null, "this", null, "is", "a", null, "test", null };
+			CollectionAssert.AreEqual("this is a test".Split(' '), input.WhereNotNull());
+		}
+
+		[Test]
+		public void WhereNotNullClassAllNull()
+		{
+			Assert.AreEqual(0, new string[] { null, null, null }.WhereNotNull().Count());
+		}
+
+		[Test]
+		public void WhereNotNullStructNullArgument()
+		{
+			IEnumerable<int?> input = null;
+			Assert.Throws<ArgumentNullException>(() => input.WhereNotNull());
+		}
+
+		[Test]
+		public void WhereNotNullStruct()
+		{
+			IEnumerable<int?> input = new int?[] { null, 0, null, 1, 2, null, 3, null };
+			CollectionAssert.AreEqual(Enumerable.Range(0, 4), input.WhereNotNull());
+		}
+
+		[Test]
+		public void WhereNotNullStructAllNull()
+		{
+			Assert.AreEqual(0, new int?[] { null, null, null }.WhereNotNull().Count());
+		}
+
 		// Converts an array of non-nullable items to nullable items, replacing 'nullValue' with null.
 		private static IEnumerable<T?> ToNullable<T>(T[] source, T nullValue)
 			where T : struct

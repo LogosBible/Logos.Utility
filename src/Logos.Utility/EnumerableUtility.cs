@@ -140,5 +140,41 @@ namespace Logos.Utility
 		{
 			return source.Aggregate((float?) 0, (sum, value) => sum + value);
 		}
+
+		/// <summary>
+		/// Returns all the elements in the specified collection that are not null.
+		/// </summary>
+		/// <param name="source">An <see cref="IEnumerable{T}"/> to filter.</param>
+		/// <returns>An <see cref="IEnumerable{T}"/> that contains elements from the input sequence that are not null.</returns>
+		/// <remarks>See <a href="http://code.logos.com/blog/2010/04/wherenotnull_extension_method.html">WhereNotNull Extension Method</a>.</remarks>
+		public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> source)
+			where T : class
+		{
+			return source.Where(x => x != null);
+		}
+
+		/// <summary>
+		/// Returns all the elements in the specified collection that are not null.
+		/// </summary>
+		/// <param name="source">An <see cref="IEnumerable{T}"/> to filter.</param>
+		/// <returns>An <see cref="IEnumerable{T}"/> that contains elements from the input sequence that are not null.</returns>
+		/// <remarks>See <a href="http://code.logos.com/blog/2010/04/wherenotnull_extension_method.html">WhereNotNull Extension Method</a>.</remarks>
+		public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> source)
+			where T : struct
+		{
+			if (source == null)
+				throw new ArgumentNullException("source");
+			return WhereNotNullImpl(source);
+		}
+
+		private static IEnumerable<T> WhereNotNullImpl<T>(this IEnumerable<T?> source)
+			where T : struct
+		{
+			foreach (T? t in source)
+			{
+				if (t.HasValue)
+					yield return t.Value;
+			}
+		}
 	}
 }
