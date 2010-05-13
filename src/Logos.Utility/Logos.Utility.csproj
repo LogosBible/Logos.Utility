@@ -61,6 +61,7 @@
     <Compile Include="EnvironmentUtility.cs" />
     <Compile Include="ExpressionUtility.cs" />
     <Compile Include="HashCodeUtility.cs" />
+    <Compile Include="IO\ManagedIStream.cs" />
     <Compile Include="IO\ReadOnlyStream.cs" />
     <Compile Include="IO\RebasedStream.cs" />
     <Compile Include="IO\WrappingStream.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Scope.cs" />
     <Compile Include="Security\Cryptography\Salsa20.cs" />
     <Compile Include="ServiceModel\CommunicationObjectUtility.cs" />
+    <Compile Include="IO\StreamUtility.cs" />
     <Compile Include="Threading\AsyncResult.cs" />
     <Compile Include="Threading\ThreadUtility.cs" />
     <Compile Include="Win32.cs" />

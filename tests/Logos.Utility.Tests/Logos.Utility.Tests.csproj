@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Salsa20Tests.cs" />
     <Compile Include="ScopeTests.cs" />
+    <Compile Include="StreamUtilityTests.cs" />
     <Compile Include="WrappingStreamTests.cs" />
   </ItemGroup>
   <ItemGroup>
