@@ -36,11 +36,10 @@ namespace Logos.Utility.IO
 			long position = stream.Position;
 
 			// allocate a number of DetectEncodingInfo structures for MLang to fill in
-			DetectEncodingInfo[] info = new DetectEncodingInfo[8];
-			int infoCount = info.Length;
+			DetectEncodingInfo[] infos = new DetectEncodingInfo[8];
+			int infoCount = infos.Length;
 
 			// allow MLang to seek to the "beginning" (i.e., current position) of the stream by rebasing it
-			using (PinnedGCHandle h = new PinnedGCHandle(info))
 			using (RebasedStream rebased = new RebasedStream(stream))
 			{
 				try
@@ -52,13 +51,13 @@ namespace Logos.Utility.IO
 					ManagedIStream istream = new ManagedIStream(rebased);
 
 					// detect the code page
-					int hresult = multiLanguage.DetectCodepageInIStream(MultiLanguageDetectCodePage.None, 0, istream, h.Pointer, ref infoCount);
+					int hresult = multiLanguage.DetectCodepageInIStream(MultiLanguageDetectCodePage.None, 0, istream, ref infos[0], ref infoCount);
 					GC.KeepAlive(istream);
 
 					if (infoCount > 0 && (hresult == Win32.S_OK || hresult == Win32.S_FALSE))
 					{
 						// take the best code page that was found
-						int nCodePage = (int) info.Take(infoCount).OrderByDescending(i => i.nConfidence).Select(i => i.nCodePage).FirstOrDefault();
+						int nCodePage = (int) infos.Take(infoCount).OrderByDescending(i => i.nConfidence).Select(i => i.nCodePage).FirstOrDefault();
 						encoding = Encoding.GetEncoding(nCodePage);
 					}
 				}

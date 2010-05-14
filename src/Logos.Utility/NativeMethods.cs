@@ -51,7 +51,7 @@ namespace Logos.Utility
 		void ConvertStringFromUnicodeEx();
 
 		[PreserveSig]
-		int DetectCodepageInIStream(MultiLanguageDetectCodePage flags, uint dwPrefWinCodePage, IStream pstmIn, IntPtr lpEncoding, ref int pnScores);
+		int DetectCodepageInIStream(MultiLanguageDetectCodePage flags, uint dwPrefWinCodePage, IStream pstmIn, ref DetectEncodingInfo lpEncoding, ref int pnScores);
 
 		void DetectInputCodepage();
 		void ValidateCodePage();
