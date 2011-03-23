@@ -64,6 +64,7 @@
     <Compile Include="EnumerableUtility.cs" />
     <Compile Include="EnvironmentUtility.cs" />
     <Compile Include="ExpressionUtility.cs" />
+    <Compile Include="GenericComparer.cs" />
     <Compile Include="HashCodeUtility.cs" />
     <Compile Include="IO\ManagedIStream.cs" />
     <Compile Include="IO\ReadOnlyStream.cs" />
