@@ -8,7 +8,7 @@ namespace Logos.Utility.Tests
 	public class GuidUtilityTests
 	{
 		[Test]
-		public void ToNetworkOrder()
+		public void SwapByteOrder()
 		{
 			Guid guid = new Guid(0x01020304, 0x0506, 0x0708, 9, 10, 11, 12, 13, 14, 15, 16);
 			byte[] bytes = guid.ToByteArray();
