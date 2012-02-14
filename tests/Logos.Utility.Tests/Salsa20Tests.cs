@@ -1,6 +1,6 @@
 ﻿/*
  * These tests for the Salsa20 implementation are designed to be
- * used with the MbUnit testing framework.
+ * used with the NUnit testing framework.
  *
  * This work is hereby released into the Public Domain. To view a copy of the public domain dedication,
  * visit http://creativecommons.org/licenses/publicdomain/ or send a letter to
