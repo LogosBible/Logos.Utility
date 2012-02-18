@@ -83,6 +83,7 @@
     <Compile Include="Security\Cryptography\Salsa20.cs" />
     <Compile Include="ServiceModel\CommunicationObjectUtility.cs" />
     <Compile Include="IO\StreamUtility.cs" />
+    <Compile Include="StringUtility.cs" />
     <Compile Include="Threading\AsyncResult.cs" />
     <Compile Include="Threading\TaskCompletionSourceUtility.cs" />
     <Compile Include="Threading\TaskUtility.cs" />
