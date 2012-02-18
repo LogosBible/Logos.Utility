@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ascii85Tests.cs" />
     <Compile Include="ClonableClass.cs" />
     <Compile Include="DelegateUtilityTests.cs" />
     <Compile Include="GuidUtilityTests.cs" />
