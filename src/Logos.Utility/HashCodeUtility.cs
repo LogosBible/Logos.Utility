@@ -1,4 +1,3 @@
-
 namespace Logos.Utility
 {
 	/// <summary>
@@ -153,6 +152,110 @@ namespace Logos.Utility
 				}
 
 				return (int) c;
+			}
+		}
+
+		/// <summary>
+		/// Gets a hash code for the specified <see cref="bool"/>; this hash code is guaranteed not to change in the future.
+		/// </summary>
+		/// <param name="value">The <see cref="bool"/> to hash.</param>
+		/// <returns>A hash code for the specified <see cref="bool"/>.</returns>
+		public static int GetPersistentHashCode(bool value)
+		{
+			// these values are the persistent hash codes for 0 and 1
+			return value ? -1266253386 : 1800329511;
+		}
+
+		/// <summary>
+		/// Gets a hash code for the specified <see cref="int"/>; this hash code is guaranteed not to change in the future.
+		/// </summary>
+		/// <param name="value">The <see cref="int"/> to hash.</param>
+		/// <returns>A hash code for the specified <see cref="int"/>.</returns>
+		/// <remarks>Based on <a href="http://www.concentric.net/~Ttwang/tech/inthash.htm">Robert Jenkins' 32 bit integer hash function</a>.</remarks>
+		public static int GetPersistentHashCode(int value)
+		{
+			unchecked
+			{
+				uint hash = (uint) value;
+				hash = (hash + 0x7ed55d16) + (hash << 12);
+				hash = (hash ^ 0xc761c23c) ^ (hash >> 19);
+				hash = (hash + 0x165667b1) + (hash << 5);
+				hash = (hash + 0xd3a2646c) ^ (hash << 9);
+				hash = (hash + 0xfd7046c5) + (hash << 3);
+				hash = (hash ^ 0xb55a4f09) ^ (hash >> 16);
+				return (int) hash;
+			}
+		}
+
+		/// <summary>
+		/// Gets a hash code for the specified <see cref="long"/>; this hash code is guaranteed not to change in the future.
+		/// </summary>
+		/// <param name="value">The <see cref="long"/> to hash.</param>
+		/// <returns>A hash code for the specified <see cref="long"/>.</returns>
+		/// <remarks>Based on <a href="http://www.concentric.net/~Ttwang/tech/inthash.htm">64 bit to 32 bit Hash Functions</a>.</remarks>
+		public static int GetPersistentHashCode(long value)
+		{
+			unchecked
+			{
+				ulong hash = (ulong) value;
+				hash = (~hash) + (hash << 18);
+				hash = hash ^ (hash >> 31);
+				hash = hash * 21;
+				hash = hash ^ (hash >> 11);
+				hash = hash + (hash << 6);
+				hash = hash ^ (hash >> 22);
+				return (int) hash;
+			}
+		}
+
+		/// <summary>
+		/// Gets a hash code for the specified <see cref="string"/>; this hash code is guaranteed not to change in the future.
+		/// </summary>
+		/// <param name="value">The <see cref="string"/> to hash.</param>
+		/// <returns>A hash code for the specified <see cref="string"/>.</returns>
+		/// <remarks>Based on <a href="http://www.azillionmonkeys.com/qed/hash.html">SuperFastHash</a>.</remarks>
+		public static int GetPersistentHashCode(string value)
+		{
+			unchecked
+			{
+				// check for degenerate input
+				if (string.IsNullOrEmpty(value))
+					return 0;
+
+				int length = value.Length;
+				uint hash = (uint) length;
+
+				int remainder = length & 1;
+				length >>= 1;
+
+				// main loop
+				int index = 0;
+				for (; length > 0; length--)
+				{
+					hash += value[index];
+					uint temp = (uint) (value[index + 1] << 11) ^ hash;
+					hash = (hash << 16) ^ temp;
+					index += 2;
+					hash += hash >> 11;
+				}
+
+				// handle odd string length
+				if (remainder == 1)
+				{
+					hash += value[index];
+					hash ^= hash << 11;
+					hash += hash >> 17;
+				}
+
+				// force "avalanching" of final 127 bits
+				hash ^= hash << 3;
+				hash += hash >> 5;
+				hash ^= hash << 4;
+				hash += hash >> 17;
+				hash ^= hash << 25;
+				hash += hash >> 6;
+
+				return (int) hash;
 			}
 		}
 
