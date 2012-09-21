@@ -40,6 +40,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -48,10 +50,12 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ascii85.cs" />
@@ -62,16 +66,19 @@
     <Compile Include="DisposableService.cs" />
     <Compile Include="DisposableUtility.cs" />
     <Compile Include="ElementComparer.cs" />
+    <Compile Include="ElementUtility.cs" />
     <Compile Include="EnumerableUtility.cs" />
     <Compile Include="EnvironmentUtility.cs" />
     <Compile Include="ExpressionUtility.cs" />
     <Compile Include="GenericComparer.cs" />
     <Compile Include="GuidUtility.cs" />
     <Compile Include="HashCodeUtility.cs" />
+    <Compile Include="HyperlinkUtility.cs" />
     <Compile Include="IO\ManagedIStream.cs" />
     <Compile Include="IO\ReadOnlyStream.cs" />
     <Compile Include="IO\RebasedStream.cs" />
     <Compile Include="IO\WrappingStream.cs" />
+    <Compile Include="MouseUtility.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Net\HttpWebRequestUtility.cs" />
     <Compile Include="ObjectImpl.cs" />
@@ -90,6 +97,9 @@
     <Compile Include="Threading\TaskUtility.cs" />
     <Compile Include="Threading\ThreadUtility.cs" />
     <Compile Include="Win32.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
