@@ -95,6 +95,36 @@ namespace Logos.Utility.Tests
 		}
 
 		[Test]
+		public void SortFirstAscendingSecondAscendingThirdAscending()
+		{
+			Random random = new Random(3);
+
+			var data = new Triple[100000];
+			for (int index = 0; index < data.Length; index++)
+				data[index] = new Triple(random.Next(100), random.Next(100), random.Next(100));
+
+			var sorted1 = data.OrderBy(x => x.First).ThenBy(x => x.Second).ThenBy(x => x.Third);
+			var sorted2 = data.LazyOrderBy(x => x.First).ThenBy(x => x.Second).ThenBy(x => x.Third);
+
+			CollectionAssert.AreEqual(sorted1, sorted2);
+		}
+		
+		[Test]
+		public void SortFirstAscendingSecondDescendingThirdAscending()
+		{
+			Random random = new Random(3);
+
+			var data = new Triple[100000];
+			for (int index = 0; index < data.Length; index++)
+				data[index] = new Triple(random.Next(100), random.Next(100), random.Next(100));
+
+			var sorted1 = data.OrderBy(x => x.First).ThenByDescending(x => x.Second).ThenBy(x => x.Third);
+			var sorted2 = data.LazyOrderBy(x => x.First).ThenByDescending(x => x.Second).ThenBy(x => x.Third);
+
+			CollectionAssert.AreEqual(sorted1, sorted2);
+		}
+
+		[Test]
 		public void SortFirstAscendingCustom()
 		{
 			Random random = new Random(7);

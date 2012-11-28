@@ -60,7 +60,8 @@ namespace Logos.Utility
 		public override ElementComparer<TSource> Append(ElementComparer<TSource> next)
 		{
 			// append the new ordering to the tail of the current chain
-			return m_next == null ? new ElementComparer<TSource, TKey>(m_keySelector, m_comparer, m_isDescending, next) : m_next.Append(next);
+			var newNext = m_next == null ? next : m_next.Append(next);
+			return new ElementComparer<TSource, TKey>(m_keySelector, m_comparer, m_isDescending, newNext);
 		}
 
 		readonly Func<TSource, TKey> m_keySelector;
