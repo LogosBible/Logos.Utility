@@ -1,4 +1,3 @@
-
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -8,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Logos Bible Software")]
 [assembly: AssemblyProduct("Logos.Utility")]
-[assembly: AssemblyCopyright("Copyright 2010 Logos Bible Software")]
+[assembly: AssemblyCopyright("Copyright 2007-2013 Logos Bible Software")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

@@ -3,7 +3,7 @@ at the Logos Code Blog (http://code.logos.com/blog/)
 
 This code is licensed as follows:
 
-Copyright 2007-2012 Logos Bible Software
+Copyright 2007-2013 Logos Bible Software
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
