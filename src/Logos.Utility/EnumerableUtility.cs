@@ -11,6 +11,44 @@ namespace Logos.Utility
 	public static class EnumerableUtility
 	{
 		/// <summary>
+		/// Returns true if the count is as specified.
+		/// </summary>
+		/// <typeparam name="T">The type of the element.</typeparam>
+		/// <param name="source">The sequence.</param>
+		/// <param name="count">The count.</param>
+		/// <returns>True if the count is as specified.</returns>
+		/// <remarks>This method will often be faster than calling Enumerable.Count() and testing that value
+		/// when the count may be much larger than the count being tested.</remarks>
+		public static bool CountIsExactly<T>(this IEnumerable<T> source, int count)
+		{
+			if (source == null)
+				throw new ArgumentNullException("source");
+			if (count < 0)
+				throw new ArgumentOutOfRangeException("count");
+
+			ICollection<T> collection = source as ICollection<T>;
+			if (collection != null)
+			{
+				// use ICollection<T>.Count if available
+				return collection.Count == count;
+			}
+			else
+			{
+				// iterate the sequence
+				using (IEnumerator<T> it = source.GetEnumerator())
+				{
+					while (it.MoveNext())
+					{
+						if (count == 0)
+							return false;
+						count--;
+					}
+					return count == 0;
+				}
+			}
+		}
+
+		/// <summary>
 		/// Returns the source sequence, or an empty sequence if <paramref name="source"/> is <c>null</c>.
 		/// </summary>
 		/// <param name="source">The source sequence.</param>
