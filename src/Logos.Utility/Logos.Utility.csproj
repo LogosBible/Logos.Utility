@@ -74,6 +74,7 @@
     <Compile Include="IO\WrappingStream.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Net\HttpWebRequestUtility.cs" />
+    <Compile Include="Net\WebExceptionUtility.cs" />
     <Compile Include="ObjectImpl.cs" />
     <Compile Include="ObjectUtility.cs" />
     <Compile Include="OrderedEnumerable.cs" />
