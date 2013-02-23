@@ -135,9 +135,9 @@ namespace Logos.Utility.Security.Cryptography
 		// Returns a new byte array containing the specified number of random bytes.
 		private static byte[] GetRandomBytes(int byteCount)
 		{
-			RandomNumberGenerator rng = new RNGCryptoServiceProvider();
 			byte[] bytes = new byte[byteCount];
-			rng.GetBytes(bytes);
+			using (RandomNumberGenerator rng = new RNGCryptoServiceProvider())
+				rng.GetBytes(bytes);
 			return bytes;
 		}
 
