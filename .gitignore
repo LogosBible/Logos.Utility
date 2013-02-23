@@ -2,6 +2,9 @@
 bin/
 obj/
 
+# ignore generated files
+src/**/*.nupkg
+
 # ignore user-specific options files
 *.suo
 *.csproj.user
