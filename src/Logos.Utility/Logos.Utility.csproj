@@ -64,6 +64,7 @@
     <Compile Include="ElementComparer.cs" />
     <Compile Include="EnumerableUtility.cs" />
     <Compile Include="EnvironmentUtility.cs" />
+    <Compile Include="EventHandlerUtility.cs" />
     <Compile Include="ExpressionUtility.cs" />
     <Compile Include="GenericComparer.cs" />
     <Compile Include="GuidUtility.cs" />
