@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Text;
 
 namespace Logos.Utility
@@ -187,7 +186,6 @@ namespace Logos.Utility
                                 break;
                             default:
                                 throw new FormatException("Unexpected character following '~': '{0}'".FormatInvariant(encoded[i]));
-                               
                         }
                         break;
                     default:

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ascii85.cs" />
+    <Compile Include="Ascii85HttpHeader.cs" />
     <Compile Include="ComponentModel\NotifyPropertyChangedUtility.cs" />
     <Compile Include="DateTimeUtility.cs" />
     <Compile Include="DelegateUtility.cs" />
