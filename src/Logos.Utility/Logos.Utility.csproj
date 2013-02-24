@@ -64,6 +64,7 @@
     <Compile Include="ElementComparer.cs" />
     <Compile Include="EnumerableUtility.cs" />
     <Compile Include="EnvironmentUtility.cs" />
+    <Compile Include="EventHandlerUtility.cs" />
     <Compile Include="ExpressionUtility.cs" />
     <Compile Include="GenericComparer.cs" />
     <Compile Include="GuidUtility.cs" />
@@ -72,6 +73,9 @@
     <Compile Include="IO\ReadOnlyStream.cs" />
     <Compile Include="IO\RebasedStream.cs" />
     <Compile Include="IO\WrappingStream.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LoggerImpl.cs" />
+    <Compile Include="Logging\LogManager.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Net\HttpWebRequestUtility.cs" />
     <Compile Include="Net\WebExceptionUtility.cs" />

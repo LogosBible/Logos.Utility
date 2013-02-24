@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -9,6 +8,31 @@ namespace Logos.Utility.Tests
 	[TestFixture]
 	public class EnumerableUtilityTests
 	{
+		[TestCase(new int[0], 0, true)]
+		[TestCase(new int[0], 1, false)]
+		[TestCase(new[] { 1 }, 0, false)]
+		[TestCase(new[] { 1 }, 1, true)]
+		[TestCase(new[] { 1 }, 2, false)]
+		[TestCase(new[] { 1 }, int.MaxValue, false)]
+		public void CountIsExactly(int[] items, int count, bool expected)
+		{
+			Assert.AreEqual(expected, items.CountIsExactly(count));
+			Assert.AreEqual(expected, YieldIntegers(items.Length).CountIsExactly(count));	
+		}
+
+		private static IEnumerable<int> YieldIntegers(int count)
+		{
+			for (int i = 0; i < count; i++)
+				yield return i;
+		}
+		
+		[Test]
+		public void CountIsExactlyInvalidArguments()
+		{
+			Assert.Throws<ArgumentOutOfRangeException>(() => new int[0].CountIsExactly(-1));
+			Assert.Throws<ArgumentNullException>(() => EnumerableUtility.CountIsExactly(default(int[]), -1));
+		}
+
 		[Test]
 		public void EmptyIfNullNull()
 		{
