@@ -5,5 +5,6 @@ Task Build {
 }
 
 Task Tests -depends Build {
-  Exec { tools\NUnit\nunit-console.exe /nologo /framework=4.0 tests\Logos.Utility.nunit }
+  mkdir build -force
+  Exec { tools\NUnit\nunit-console.exe /nologo /framework=4.0 /xml=build\Logos.Utility.NUnit.xml tests\Logos.Utility.nunit }
 }

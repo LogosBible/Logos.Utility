@@ -1,5 +1,6 @@
 # ignore output folders
 bin/
+build/
 obj/
 
 # ignore generated files
@@ -15,4 +16,3 @@ _ReSharper.*
 
 # ignore NUnit output
 tests/Logos.Utility.VisualState.xml
-TestResult.xml
