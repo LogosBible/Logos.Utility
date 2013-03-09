@@ -1,30 +1,38 @@
+using System;
+
 namespace Logos.Utility.Logging
 {
 	/// <summary>
 	/// The implementation of a logger.
 	/// </summary>
-	public abstract class LoggerImpl
+	public abstract class LoggerCore
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="LoggerImpl"/> class.
+		/// Initializes a new instance of the <see cref="LoggerCore"/> class.
 		/// </summary>
-		/// <param name="logger">The logger.</param>
-		protected LoggerImpl(Logger logger)
+		protected LoggerCore()
 		{
-			m_logger = logger;
 		}
 
 		/// <summary>
-		/// Configures the logger.
+		/// True if debug logging is enabled.
 		/// </summary>
-		/// <param name="isDebugEnabled">True if debug logging is enabled.</param>
-		/// <param name="isInfoEnabled">True if info logging is enabled.</param>
-		/// <param name="isWarnEnabled">True if warn logging is enabled.</param>
-		/// <param name="isErrorEnabled">True if error logging is enabled.</param>
-		protected void ConfigureLogger(bool isDebugEnabled, bool isInfoEnabled, bool isWarnEnabled, bool isErrorEnabled)
-		{
-			m_logger.UpdateConfiguration(this, isDebugEnabled, isInfoEnabled, isWarnEnabled, isErrorEnabled);
-		}
+		protected abstract bool IsDebugEnabledCore { get; }
+
+		/// <summary>
+		/// True if info logging is enabled.
+		/// </summary>
+		protected abstract bool IsInfoEnabledCore { get; }
+
+		/// <summary>
+		/// True if warn logging is enabled.
+		/// </summary>
+		protected abstract bool IsWarnEnabledCore { get; }
+
+		/// <summary>
+		/// True if error logging is enabled.
+		/// </summary>
+		protected abstract bool IsErrorEnabledCore { get; }
 
 		/// <summary>
 		/// Implements debug logging.
@@ -58,6 +66,36 @@ namespace Logos.Utility.Logging
 		/// <remarks>If the arguments are null or empty, the message should not be formatted.</remarks>
 		protected abstract void ErrorCore(string message, object[] args);
 
+		/// <summary>
+		/// Raises the ConfigurationUpdated event; should be called when any of the logging enabled properties change.
+		/// </summary>
+		protected void RaiseConfigurationUpdated()
+		{
+			ConfigurationUpdated.Raise(this);
+		}
+
+		internal event EventHandler ConfigurationUpdated;
+
+		internal bool IsDebugEnabled
+		{
+			get { return IsDebugEnabledCore; }
+		}
+
+		internal bool IsInfoEnabled
+		{
+			get { return IsInfoEnabledCore; }
+		}
+
+		internal bool IsWarnEnabled
+		{
+			get { return IsWarnEnabledCore; }
+		}
+
+		internal bool IsErrorEnabled
+		{
+			get { return IsErrorEnabledCore; }
+		}
+
 		internal void Debug(string message, params object[] args)
 		{
 			DebugCore(message, args);
@@ -78,13 +116,32 @@ namespace Logos.Utility.Logging
 			ErrorCore(message, args);
 		}
 
-		internal static readonly LoggerImpl Null = new NullLoggerCore();
+		internal static readonly LoggerCore Null = new NullLoggerCore();
 
-		private class NullLoggerCore : LoggerImpl
+		private class NullLoggerCore : LoggerCore
 		{
 			public NullLoggerCore()
-				: base(null)
 			{
+			}
+
+			protected override bool IsDebugEnabledCore
+			{
+				get { return false; }
+			}
+
+			protected override bool IsInfoEnabledCore
+			{
+				get { return false; }
+			}
+
+			protected override bool IsWarnEnabledCore
+			{
+				get { return false; }
+			}
+
+			protected override bool IsErrorEnabledCore
+			{
+				get { return false; }
 			}
 
 			protected override void DebugCore(string message, object[] args)
@@ -103,7 +160,5 @@ namespace Logos.Utility.Logging
 			{
 			}
 		}
-
-		readonly Logger m_logger;
 	}
 }

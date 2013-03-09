@@ -59,7 +59,7 @@ namespace Logos.Utility.Logging
 		public void Debug(string message)
 		{
 			if (m_isDebugEnabled)
-				m_impl.Debug(message, null);
+				m_core.Debug(message, null);
 		}
 
 		/// <summary>
@@ -71,7 +71,7 @@ namespace Logos.Utility.Logging
 		public void Debug(string message, params object[] args)
 		{
 			if (m_isDebugEnabled)
-				m_impl.Debug(message, args);
+				m_core.Debug(message, args);
 		}
 
 		/// <summary>
@@ -81,19 +81,19 @@ namespace Logos.Utility.Logging
 		public void Info(string message)
 		{
 			if (m_isInfoEnabled)
-				m_impl.Info(message, null);
+				m_core.Info(message, null);
 		}
 
 		/// <summary>
 		/// Writes the specified message using info logging.
 		/// </summary>
 		/// <param name="message">The message.</param>
-		/// <param name="args">The arguments.</param>
+		/// <param name="aobjArgs">The arguments.</param>
 		/// <remarks>If the arguments are null or empty, the message is not formatted.</remarks>
-		public void Info(string message, params object[] args)
+		public void Info(string message, params object[] aobjArgs)
 		{
 			if (m_isInfoEnabled)
-				m_impl.Info(message, args);
+				m_core.Info(message, aobjArgs);
 		}
 
 		/// <summary>
@@ -103,19 +103,19 @@ namespace Logos.Utility.Logging
 		public void Warn(string message)
 		{
 			if (m_isWarnEnabled)
-				m_impl.Warn(message, null);
+				m_core.Warn(message, null);
 		}
 
 		/// <summary>
 		/// Writes the specified message using warn logging.
 		/// </summary>
 		/// <param name="message">The message.</param>
-		/// <param name="args">The arguments.</param>
+		/// <param name="aobjArgs">The arguments.</param>
 		/// <remarks>If the arguments are null or empty, the message is not formatted.</remarks>
-		public void Warn(string message, params object[] args)
+		public void Warn(string message, params object[] aobjArgs)
 		{
 			if (m_isWarnEnabled)
-				m_impl.Warn(message, args);
+				m_core.Warn(message, aobjArgs);
 		}
 
 		/// <summary>
@@ -125,19 +125,19 @@ namespace Logos.Utility.Logging
 		public void Error(string message)
 		{
 			if (m_isErrorEnabled)
-				m_impl.Error(message, null);
+				m_core.Error(message, null);
 		}
 
 		/// <summary>
 		/// Writes the specified message using error logging.
 		/// </summary>
 		/// <param name="message">The message.</param>
-		/// <param name="args">The arguments.</param>
+		/// <param name="aobjArgs">The arguments.</param>
 		/// <remarks>If the arguments are null or empty, the message is not formatted.</remarks>
-		public void Error(string message, params object[] args)
+		public void Error(string message, params object[] aobjArgs)
 		{
 			if (m_isErrorEnabled)
-				m_impl.Error(message, args);
+				m_core.Error(message, aobjArgs);
 		}
 
 		/// <summary>
@@ -148,22 +148,28 @@ namespace Logos.Utility.Logging
 		internal Logger(string name)
 		{
 			m_name = name;
-			m_impl = LoggerImpl.Null;
+			m_core = LoggerCore.Null;
 		}
 
-		internal void UpdateConfiguration(LoggerImpl impl, bool isDebugEnabled, bool isInfoEnabled, bool isWarnEnabled, bool isErrorEnabled)
+		internal void SetLoggerCore(LoggerCore core)
 		{
-			m_impl = impl ?? LoggerImpl.Null;
-			m_isDebugEnabled = isDebugEnabled;
-			m_isInfoEnabled = isInfoEnabled;
-			m_isWarnEnabled = isWarnEnabled;
-			m_isErrorEnabled = isErrorEnabled;
+			m_core = core ?? LoggerCore.Null;
+			m_core.ConfigurationUpdated += (s, e) => UpdateConfiguration();
+			UpdateConfiguration();
+		}
+
+		private void UpdateConfiguration()
+		{
+			m_isDebugEnabled = m_core.IsDebugEnabled;
+			m_isInfoEnabled = m_core.IsInfoEnabled;
+			m_isWarnEnabled = m_core.IsWarnEnabled;
+			m_isErrorEnabled = m_core.IsErrorEnabled;
 
 			ConfigurationUpdated.Raise(this);
 		}
 
 		readonly string m_name;
-		LoggerImpl m_impl;
+		LoggerCore m_core;
 		bool m_isDebugEnabled;
 		bool m_isInfoEnabled;
 		bool m_isWarnEnabled;

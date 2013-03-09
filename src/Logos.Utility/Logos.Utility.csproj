@@ -75,7 +75,8 @@
     <Compile Include="IO\RebasedStream.cs" />
     <Compile Include="IO\WrappingStream.cs" />
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Logging\LoggerImpl.cs" />
+    <Compile Include="Logging\LoggerCore.cs" />
+    <Compile Include="Logging\LoggingService.cs" />
     <Compile Include="Logging\LogManager.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Net\HttpWebRequestUtility.cs" />
