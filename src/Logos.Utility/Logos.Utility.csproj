@@ -96,6 +96,7 @@
     <Compile Include="Threading\TaskCompletionSourceUtility.cs" />
     <Compile Include="Threading\TaskUtility.cs" />
     <Compile Include="Threading\ThreadUtility.cs" />
+    <Compile Include="TimeSpanUtility.cs" />
     <Compile Include="Win32.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
