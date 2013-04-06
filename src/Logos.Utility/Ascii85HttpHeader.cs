@@ -95,7 +95,7 @@ namespace Logos.Utility
                         sb.Append(ch);
                         break;
                     default:
-                        if ((ch < c_firstCharacter) || (ch > c_lastCharacter))
+                        if ((ch < Ascii85.FirstChar) || (ch > Ascii85.LastChar))
                             throw new FormatException("Invalid character '{0}' in Ascii85 string.".FormatInvariant(ch));
                         else
                             sb.Append(ch);
@@ -196,9 +196,5 @@ namespace Logos.Utility
             }
             return sb.ToString();
         }
-
-        // the first and last characters used in the Ascii85 encoding character set
-        const char c_firstCharacter = '!';
-        const char c_lastCharacter = 'u';
     }
 }

@@ -159,9 +159,15 @@ namespace Logos.Utility
 			stream.WriteByte((byte) (value & 0xFF));
 		}
 
-		// the first and last characters used in the Ascii85 encoding character set
-		private const char FirstChar = '!';
-		private const char LastChar = 'u';
+        /// <summary>
+        /// The first character used in the Ascii85 encoding character set
+        /// </summary>
+        public const char FirstChar = '!';
+
+        /// <summary>
+        /// The last character used in the Ascii85 encoding character set
+        /// </summary>
+        public const char LastChar = 'u';
 
 		static readonly uint[] s_powersOf85 = new uint[] { 85u * 85u * 85u * 85u, 85u * 85u * 85u, 85u * 85u, 85u, 1 };
 	}
