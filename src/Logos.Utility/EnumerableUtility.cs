@@ -32,19 +32,17 @@ namespace Logos.Utility
 				// use ICollection<T>.Count if available
 				return collection.Count == count;
 			}
-			else
+
+			// iterate the sequence
+			using (IEnumerator<T> it = source.GetEnumerator())
 			{
-				// iterate the sequence
-				using (IEnumerator<T> it = source.GetEnumerator())
+				while (it.MoveNext())
 				{
-					while (it.MoveNext())
-					{
-						if (count == 0)
-							return false;
-						count--;
-					}
-					return count == 0;
+					if (count == 0)
+						return false;
+					count--;
 				}
+				return count == 0;
 			}
 		}
 
