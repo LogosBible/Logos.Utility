@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Logos.Utility
 {
@@ -120,81 +121,67 @@ namespace Logos.Utility
             StringBuilder sb = new StringBuilder(encoded.Length);
 
             // Walk the input string.
-
             int i = 0;
             while (i < encoded.Length)
             {
-                switch (encoded[i])
+                char cipherText = encoded[i++];
+                if (cipherText == Tilde)
                 {
-                    case 'v':
-                        sb.Append('(');
-                        break;
-                    case 'w':
-                        sb.Append(')');
-                        break;
-                    case 'x':
-                        sb.Append('<');
-                        break;
-                    case 'y':
-                        sb.Append('>');
-                        break;
-                    case '|':
-                        sb.Append('@');
-                        break;
-                    case ' ':
-                    case '\n':
-                    case '\r':
-                    case '\t':
-                        // Pass white space through unchanged.
-                        sb.Append(encoded[i]);
-                        break;
-                    case '~':
-                        i++;
-                        if (i >= encoded.Length)
-                            throw new FormatException("'~' cannot be the last character of the encoded string.");
-                        switch (encoded[i])
-                        {
-                            case 'a':
-                                sb.Append(',');
-                                break;
-                            case 'b':
-                                sb.Append(';');
-                                break;
-                            case 'c':
-                                sb.Append(':');
-                                break;
-                            case 'd':
-                                sb.Append('\\');
-                                break;
-                            case 'e':
-                                sb.Append('"');
-                                break;
-                            case 'f':
-                                sb.Append('/');
-                                break;
-                            case 'g':
-                                sb.Append('[');
-                                break;
-                            case 'h':
-                                sb.Append(']');
-                                break;
-                            case 'i':
-                                sb.Append('?');
-                                break;
-                            case 'j':
-                                sb.Append('=');
-                                break;
-                            default:
-                                throw new FormatException("Unexpected character following '~': '{0}'".FormatInvariant(encoded[i]));
-                        }
-                        break;
-                    default:
-                        sb.Append(encoded[i]);
-                        break;
+                    if (i >= encoded.Length)
+                        throw new FormatException("'~' cannot be the last character of the encoded string.");
+                    char cipherTextNext = encoded[i++];
+                    if (tildeCTtoPT.ContainsKey(cipherTextNext) == false)
+                        throw new FormatException("Unexpected character following '~': '{0}'".FormatInvariant(encoded[i]));
+                    sb.Append(tildeCTtoPT[cipherTextNext]);
                 }
-                i++;
+                else if (CTtoPT.ContainsKey(cipherText))
+                {
+                    sb.Append(CTtoPT[cipherText]);
+                }
+                else
+                {
+                    sb.Append(cipherText);
+                }
             }
             return sb.ToString();
+        }
+
+        const char Tilde = '~';
+
+        // CT: Ciphertext (encoded chars)
+        // PT: Plaintext (non-encoded chars)
+        static IDictionary<char, char> CTtoPT = new Dictionary<char, char>
+        {
+            { 'v', '(' },
+            { 'w', ')' },
+            { 'x', '<' },
+            { 'y', '>' },
+            { '|', '@' },
+            { ' ', ' ' },
+            { '\n', '\n' },
+            { '\r', '\r' },
+            { '\t', '\t' }
+        };
+
+        static IDictionary<char, char> tildeCTtoPT = new Dictionary<char, char>
+        {
+            { 'a', ',' },
+            { 'b', ';' },
+            { 'c', ':' },
+            { 'd', '\\' },
+            { 'e', '"' },
+            { 'f', '/' },
+            { 'g', '[' },
+            { 'h', ']' },
+            { 'i', '?' },
+            { 'j', '=' },
+        };
+
+        static IDictionary<char, string> getPTtoCT()
+        {
+            var result = new Dictionary<char, string>();
+
+            return result;
         }
     }
 }
