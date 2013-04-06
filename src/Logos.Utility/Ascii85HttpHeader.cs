@@ -46,7 +46,7 @@ namespace Logos.Utility
             // walk the characters
             foreach (char ch in ascii85)
             {
-                if (EncoderLookup.ContainsKey(ch))
+                if (EncoderLookupKeys.Contains(ch.ToString()))
                 {
                     sb.Append(EncoderLookup[ch]);
                 }
@@ -79,23 +79,23 @@ namespace Logos.Utility
             int i = 0;
             while (i < encoded.Length)
             {
-                char cipherText = encoded[i++];
-                if (cipherText == Tilde)
+                char ch = encoded[i++];
+                if (ch == Tilde)
                 {
                     if (i >= encoded.Length)
                         throw new FormatException("'~' cannot be the last character of the encoded string.");
-                    char cipherTextNext = encoded[i++];
-                    if (DecoderTildeLookup.ContainsKey(cipherTextNext) == false)
+                    char ch2 = encoded[i++];
+                    if (DecoderTildeLookupKeys.Contains(ch2.ToString()) == false)
                         throw new FormatException("Unexpected character following '~': '{0}'".FormatInvariant(encoded[i]));
-                    sb.Append(DecoderTildeLookup[cipherTextNext]);
+                    sb.Append(DecoderTildeLookup[ch2]);
                 }
-                else if (DecoderLookup.ContainsKey(cipherText))
+                else if (DecoderLookupKeys.Contains(ch.ToString()))
                 {
-                    sb.Append(DecoderLookup[cipherText]);
+                    sb.Append(DecoderLookup[ch]);
                 }
                 else
                 {
-                    sb.Append(cipherText);
+                    sb.Append(ch);
                 }
             }
             return sb.ToString();
@@ -115,6 +115,7 @@ namespace Logos.Utility
             { '\r', '\r' },
             { '\t', '\t' }
         };
+        static string DecoderLookupKeys = string.Join(string.Empty, DecoderLookup.Keys);
 
         static IDictionary<char, char> DecoderTildeLookup = new Dictionary<char, char>
         {
@@ -129,9 +130,11 @@ namespace Logos.Utility
             { 'i', '?' },
             { 'j', '=' },
         };
+        static string DecoderTildeLookupKeys = string.Join(string.Empty, DecoderTildeLookup.Keys);
 
         static object CreateEncoderLookupLock = new object();
         static IDictionary<char, string> EncoderLookup = null;
+        static string EncoderLookupKeys;
 
         static void CreateEncoderLookup()
         {
@@ -152,6 +155,8 @@ namespace Logos.Utility
                 {
                     EncoderLookup.Add(entry.Value, Tilde + entry.Key.ToString());
                 }
+
+                EncoderLookupKeys = string.Join(string.Empty, EncoderLookup.Keys);
             }
         }
     }
