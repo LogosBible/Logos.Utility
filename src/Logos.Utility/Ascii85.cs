@@ -74,7 +74,7 @@ namespace Logos.Utility
 						// handle "z" block specially
 						DecodeValue(stream, value, 0);
 					}
-					else if (ch < c_firstCharacter || ch > c_lastCharacter)
+					else if (ch < FirstChar || ch > LastChar)
 					{
 						throw new FormatException("Invalid character '{0}' in Ascii85 block.".FormatInvariant(ch));
 					}
@@ -83,7 +83,7 @@ namespace Logos.Utility
 						// build a 32-bit value from the input characters
 						try
 						{
-							checked { value += (uint) (s_powersOf85[count] * (ch - c_firstCharacter)); }
+							checked { value += (uint) (s_powersOf85[count] * (ch - FirstChar)); }
 						}
 						catch (OverflowException ex)
 						{
@@ -134,7 +134,7 @@ namespace Logos.Utility
 
 			for (int index = 4; index >= 0; index--)
 			{
-				encoded[index] = (char) ((value % 85) + c_firstCharacter);
+				encoded[index] = (char) ((value % 85) + FirstChar);
 				value /= 85;
 			}
 
@@ -160,8 +160,8 @@ namespace Logos.Utility
 		}
 
 		// the first and last characters used in the Ascii85 encoding character set
-		const char c_firstCharacter = '!';
-		const char c_lastCharacter = 'u';
+		private const char FirstChar = '!';
+		private const char LastChar = 'u';
 
 		static readonly uint[] s_powersOf85 = new uint[] { 85u * 85u * 85u * 85u, 85u * 85u * 85u, 85u * 85u, 85u, 1 };
 	}
