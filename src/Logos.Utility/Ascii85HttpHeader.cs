@@ -35,11 +35,10 @@ namespace Logos.Utility
             if (ascii85 == null)
                 throw new ArgumentNullException("ascii85");
 
-            // We will pre-compute Plaintext to Ciphertext dictionaries based on the CTtoPT ones
-            // To allow this to occur only once, we lock
-            if (PTtoCT == null)
-                CreatePTtoCT();
-            Debug.Assert(PTtoCT != null);
+            // We pre-compute an EncoderLookup dictionary based on the DecoderLookup ones
+            if (EncoderLookup == null)
+                CreateEncoderLookup();
+            Debug.Assert(EncoderLookup != null);
 
             // Instantiate a StringBuilder with more than enough room to store the new string.
             StringBuilder sb = new StringBuilder(ascii85.Length * 2);
@@ -47,9 +46,9 @@ namespace Logos.Utility
             // walk the characters
             foreach (char ch in ascii85)
             {
-                if (PTtoCT.ContainsKey(ch))
+                if (EncoderLookup.ContainsKey(ch))
                 {
-                    sb.Append(PTtoCT[ch]);
+                    sb.Append(EncoderLookup[ch]);
                 }
                 else
                 {
@@ -86,13 +85,13 @@ namespace Logos.Utility
                     if (i >= encoded.Length)
                         throw new FormatException("'~' cannot be the last character of the encoded string.");
                     char cipherTextNext = encoded[i++];
-                    if (tildeCTtoPT.ContainsKey(cipherTextNext) == false)
+                    if (DecoderTildeLookup.ContainsKey(cipherTextNext) == false)
                         throw new FormatException("Unexpected character following '~': '{0}'".FormatInvariant(encoded[i]));
-                    sb.Append(tildeCTtoPT[cipherTextNext]);
+                    sb.Append(DecoderTildeLookup[cipherTextNext]);
                 }
-                else if (CTtoPT.ContainsKey(cipherText))
+                else if (DecoderLookup.ContainsKey(cipherText))
                 {
-                    sb.Append(CTtoPT[cipherText]);
+                    sb.Append(DecoderLookup[cipherText]);
                 }
                 else
                 {
@@ -104,9 +103,7 @@ namespace Logos.Utility
 
         const char Tilde = '~';
 
-        // CT: Ciphertext (encoded chars)
-        // PT: Plaintext (non-encoded chars)
-        static IDictionary<char, char> CTtoPT = new Dictionary<char, char>
+        static IDictionary<char, char> DecoderLookup = new Dictionary<char, char>
         {
             { 'v', '(' },
             { 'w', ')' },
@@ -119,7 +116,7 @@ namespace Logos.Utility
             { '\t', '\t' }
         };
 
-        static IDictionary<char, char> tildeCTtoPT = new Dictionary<char, char>
+        static IDictionary<char, char> DecoderTildeLookup = new Dictionary<char, char>
         {
             { 'a', ',' },
             { 'b', ';' },
@@ -133,28 +130,27 @@ namespace Logos.Utility
             { 'j', '=' },
         };
 
-        // these are only used by the Encode method
-        static object encoderLock = new object();
-        static IDictionary<char, string> PTtoCT = null;
+        static object CreateEncoderLookupLock = new object();
+        static IDictionary<char, string> EncoderLookup = null;
 
-        static void CreatePTtoCT()
+        static void CreateEncoderLookup()
         {
             // Build Plaintext to Ciphertext dictionaries based on the CTtoPT ones
             // To allow this to occur only once, we lock
-            lock (encoderLock)
+            lock (CreateEncoderLookupLock)
             {
-                PTtoCT = new Dictionary<char, string>();
+                EncoderLookup = new Dictionary<char, string>();
 
-                foreach (KeyValuePair<char, char> entry in CTtoPT)
+                foreach (KeyValuePair<char, char> entry in DecoderLookup)
                 {
-                    PTtoCT.Add(entry.Value, entry.Key.ToString());
+                    EncoderLookup.Add(entry.Value, entry.Key.ToString());
                 }
                 // in addition, pass z through unchanged.
-                PTtoCT.Add('z', "z");
+                EncoderLookup.Add('z', "z");
 
-                foreach (KeyValuePair<char, char> entry in tildeCTtoPT)
+                foreach (KeyValuePair<char, char> entry in DecoderTildeLookup)
                 {
-                    PTtoCT.Add(entry.Value, Tilde + entry.Key.ToString());
+                    EncoderLookup.Add(entry.Value, Tilde + entry.Key.ToString());
                 }
             }
         }
