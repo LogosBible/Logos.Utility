@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Logos.Utility
@@ -33,73 +35,27 @@ namespace Logos.Utility
             if (ascii85 == null)
                 throw new ArgumentNullException("ascii85");
 
+            // We pre-compute an EncoderLookup dictionary based on the DecoderLookup ones
+            if (EncoderLookup == null)
+                CreateEncoderLookup();
+            Debug.Assert(EncoderLookup != null);
+
             // Instantiate a StringBuilder with more than enough room to store the new string.
             StringBuilder sb = new StringBuilder(ascii85.Length * 2);
 
             // walk the characters
             foreach (char ch in ascii85)
             {
-                switch (ch)
+                if (EncoderLookupKeys.Contains(ch.ToString()))
                 {
-                    case '(':
-                        sb.Append('v');
-                        break;
-                    case ')':
-                        sb.Append('w');
-                        break;
-                    case '<':
-                        sb.Append('x');
-                        break;
-                    case '>':
-                        sb.Append('y');
-                        break;
-                    case '@':
-                        sb.Append('|');
-                        break;
-                    case ',':
-                        sb.Append("~a");
-                        break;
-                    case ';':
-                        sb.Append("~b");
-                        break;
-                    case ':':
-                        sb.Append("~c");
-                        break;
-                    case '\\':
-                        sb.Append("~d");
-                        break;
-                    case '"':
-                        sb.Append("~e");
-                        break;
-                    case '/':
-                        sb.Append("~f");
-                        break;
-                    case '[':
-                        sb.Append("~g");
-                        break;
-                    case ']':
-                        sb.Append("~h");
-                        break;
-                    case '?':
-                        sb.Append("~i");
-                        break;
-                    case '=':
-                        sb.Append("~j");
-                        break;
-                    case ' ':
-                    case '\n':
-                    case '\r':
-                    case '\t':
-                    case 'z':
-                        // Pass white space and z through unchanged.
+                    sb.Append(EncoderLookup[ch]);
+                }
+                else
+                {
+                    if ((ch < Ascii85.FirstChar) || (ch > Ascii85.LastChar))
+                        throw new FormatException("Invalid character '{0}' in Ascii85 string.".FormatInvariant(ch));
+                    else
                         sb.Append(ch);
-                        break;
-                    default:
-                        if ((ch < c_firstCharacter) || (ch > c_lastCharacter))
-                            throw new FormatException("Invalid character '{0}' in Ascii85 string.".FormatInvariant(ch));
-                        else
-                            sb.Append(ch);
-                        break;
                 }
             }
             return sb.ToString();
@@ -120,85 +76,88 @@ namespace Logos.Utility
             StringBuilder sb = new StringBuilder(encoded.Length);
 
             // Walk the input string.
-
             int i = 0;
             while (i < encoded.Length)
             {
-                switch (encoded[i])
+                char ch = encoded[i++];
+                if (ch == Tilde)
                 {
-                    case 'v':
-                        sb.Append('(');
-                        break;
-                    case 'w':
-                        sb.Append(')');
-                        break;
-                    case 'x':
-                        sb.Append('<');
-                        break;
-                    case 'y':
-                        sb.Append('>');
-                        break;
-                    case '|':
-                        sb.Append('@');
-                        break;
-                    case ' ':
-                    case '\n':
-                    case '\r':
-                    case '\t':
-                        // Pass white space through unchanged.
-                        sb.Append(encoded[i]);
-                        break;
-                    case '~':
-                        i++;
-                        if (i >= encoded.Length)
-                            throw new FormatException("'~' cannot be the last character of the encoded string.");
-                        switch (encoded[i])
-                        {
-                            case 'a':
-                                sb.Append(',');
-                                break;
-                            case 'b':
-                                sb.Append(';');
-                                break;
-                            case 'c':
-                                sb.Append(':');
-                                break;
-                            case 'd':
-                                sb.Append('\\');
-                                break;
-                            case 'e':
-                                sb.Append('"');
-                                break;
-                            case 'f':
-                                sb.Append('/');
-                                break;
-                            case 'g':
-                                sb.Append('[');
-                                break;
-                            case 'h':
-                                sb.Append(']');
-                                break;
-                            case 'i':
-                                sb.Append('?');
-                                break;
-                            case 'j':
-                                sb.Append('=');
-                                break;
-                            default:
-                                throw new FormatException("Unexpected character following '~': '{0}'".FormatInvariant(encoded[i]));
-                        }
-                        break;
-                    default:
-                        sb.Append(encoded[i]);
-                        break;
+                    if (i >= encoded.Length)
+                        throw new FormatException("'~' cannot be the last character of the encoded string.");
+                    char ch2 = encoded[i++];
+                    if (DecoderTildeLookupKeys.Contains(ch2.ToString()) == false)
+                        throw new FormatException("Unexpected character following '~': '{0}'".FormatInvariant(encoded[i]));
+                    sb.Append(DecoderTildeLookup[ch2]);
                 }
-                i++;
+                else if (DecoderLookupKeys.Contains(ch.ToString()))
+                {
+                    sb.Append(DecoderLookup[ch]);
+                }
+                else
+                {
+                    sb.Append(ch);
+                }
             }
             return sb.ToString();
         }
 
-        // the first and last characters used in the Ascii85 encoding character set
-        const char c_firstCharacter = '!';
-        const char c_lastCharacter = 'u';
+        const char Tilde = '~';
+
+        static IDictionary<char, char> DecoderLookup = new Dictionary<char, char>
+        {
+            { 'v', '(' },
+            { 'w', ')' },
+            { 'x', '<' },
+            { 'y', '>' },
+            { '|', '@' },
+            { ' ', ' ' },
+            { '\n', '\n' },
+            { '\r', '\r' },
+            { '\t', '\t' }
+        };
+        static string DecoderLookupKeys = string.Join(string.Empty, DecoderLookup.Keys);
+
+        static IDictionary<char, char> DecoderTildeLookup = new Dictionary<char, char>
+        {
+            { 'a', ',' },
+            { 'b', ';' },
+            { 'c', ':' },
+            { 'd', '\\' },
+            { 'e', '"' },
+            { 'f', '/' },
+            { 'g', '[' },
+            { 'h', ']' },
+            { 'i', '?' },
+            { 'j', '=' },
+        };
+        static string DecoderTildeLookupKeys = string.Join(string.Empty, DecoderTildeLookup.Keys);
+
+        static object CreateEncoderLookupLock = new object();
+        static IDictionary<char, string> EncoderLookup = null;
+        static string EncoderLookupKeys;
+
+        static void CreateEncoderLookup()
+        {
+            // Build Plaintext to Ciphertext dictionaries based on the CTtoPT ones
+            // To allow this to occur only once, we lock
+            lock (CreateEncoderLookupLock)
+            {
+                EncoderLookup = new Dictionary<char, string>();
+
+                foreach (KeyValuePair<char, char> entry in DecoderLookup)
+                {
+                    EncoderLookup.Add(entry.Value, entry.Key.ToString());
+                }
+                // in addition, pass z through unchanged.
+                EncoderLookup.Add('z', "z");
+
+                foreach (KeyValuePair<char, char> entry in DecoderTildeLookup)
+                {
+                    EncoderLookup.Add(entry.Value, Tilde + entry.Key.ToString());
+                }
+
+                EncoderLookupKeys = string.Join(string.Empty, EncoderLookup.Keys);
+            }
+        }
     }
 }
