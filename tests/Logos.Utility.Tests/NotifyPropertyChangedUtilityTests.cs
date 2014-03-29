@@ -1,8 +1,7 @@
 ﻿
 using System.ComponentModel;
-using Logos.Utility.ComponentModel;
 using NUnit.Framework;
-
+using Logos.Utility.Basic;
 namespace Logos.Utility.Tests
 {
 	[TestFixture]
@@ -14,7 +13,7 @@ namespace Logos.Utility.Tests
 		public void HasChanged(string eventPropertyName, string testPropertyName, bool expected)
 		{
 			PropertyChangedEventArgs args = new PropertyChangedEventArgs(eventPropertyName);
-			Assert.That(args.HasChanged(testPropertyName), Is.EqualTo(expected));
+            Assert.That(NotifyPropertyChangedUtility.HasChanged(args,testPropertyName), Is.EqualTo(expected));
 		}
 	}
 }

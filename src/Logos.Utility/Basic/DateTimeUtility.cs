@@ -2,7 +2,7 @@
 using System;
 using System.Globalization;
 
-namespace Logos.Utility
+namespace Logos.Utility.Basic
 {
 	/// <summary>
 	/// Provides methods for manipulating dates.
@@ -27,7 +27,7 @@ namespace Logos.Utility
 		/// </summary>
 		/// <param name="value">The date to format.</param>
 		/// <returns>The formatted date.</returns>
-		public static string ToIso8601(this DateTime value)
+		public static string ToIso8601(DateTime value)
 		{
 			return value.ToUniversalTime().ToString(Iso8601Format, CultureInfo.InvariantCulture);
 		}

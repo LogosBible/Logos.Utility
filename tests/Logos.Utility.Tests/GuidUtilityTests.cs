@@ -1,6 +1,7 @@
 ﻿
 using System;
 using NUnit.Framework;
+using Logos.Utility.Basic;
 
 namespace Logos.Utility.Tests
 {

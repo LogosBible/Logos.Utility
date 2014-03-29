@@ -1,4 +1,5 @@
 
+using Logos.Utility.Basic;
 using System;
 
 namespace Logos.Utility.Tests
@@ -60,7 +61,7 @@ namespace Logos.Utility.Tests
 		public override int GetHashCode()
 		{
 			// combine the hash codes of the various components of this class
-			return HashCodeUtility.CombineHashCodes(ObjectUtility.GetHashCode(m_text), m_count);
+			return HashCodeUtility.CombineHashCodes(ObjectUtility.SafeGetHashCode(m_text), m_count);
 		}
 
 		/// <summary>

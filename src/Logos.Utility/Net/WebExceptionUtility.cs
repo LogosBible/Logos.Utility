@@ -16,7 +16,7 @@ namespace Logos.Utility.Net
 		/// <remarks>When catching <see cref="WebException"/>, the Response property may be set to a valid
 		/// <see cref="WebResponse"/> object. If this response isn't going to be used, it should be disposed to
 		/// clean up any unmanaged objects that may be associated with it.</remarks>
-		public static void DisposeResponse(this WebException ex)
+		public static void DisposeResponse(WebException ex)
 		{
 			if (ex.Response != null)
 				((IDisposable) ex.Response).Dispose();

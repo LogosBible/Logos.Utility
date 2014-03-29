@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Logos.Utility
+namespace Logos.Utility.Collection
 {
 	/// <summary>
 	/// Provides methods for manipulating dictionaries.
@@ -16,7 +16,7 @@ namespace Logos.Utility
 		/// <param name="dict">The dictionary.</param>
 		/// <param name="key">The key.</param>
 		/// <returns>The new or existing value.</returns>
-		public static TValue GetOrAddValue<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key) where TValue : new()
+		public static TValue GetOrAddValue<TKey, TValue>(IDictionary<TKey, TValue> dict, TKey key) where TValue : new()
 		{
 			TValue value;
 			if (dict.TryGetValue(key, out value))
@@ -35,7 +35,7 @@ namespace Logos.Utility
 		/// <param name="key">The key.</param>
 		/// <param name="creator">Used to create a new value if necessary</param>
 		/// <returns>The new or existing value.</returns>
-		public static TValue GetOrAddValue<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key, Func<TValue> creator)
+		public static TValue GetOrAddValue<TKey, TValue>(IDictionary<TKey, TValue> dict, TKey key, Func<TValue> creator)
 		{
 			TValue value;
 			if (dict.TryGetValue(key, out value))
@@ -53,10 +53,10 @@ namespace Logos.Utility
 		/// <param name="dict">The dictionary.</param>
 		/// <param name="key">The key.</param>
 		/// <returns>The value, or a default value.</returns>
-		public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key)
+		public static TValue GetValueOrDefault<TKey, TValue>(IDictionary<TKey, TValue> dict, TKey key)
 		{
 			// specification for IDictionary<> requires that the returned value be the default if it fails
-			TValue value;
+			TValue value = default(TValue);
 			dict.TryGetValue(key, out value);
 			return value;
 		}
@@ -70,7 +70,7 @@ namespace Logos.Utility
 		/// <param name="key">The key.</param>
 		/// <param name="defaultValue">The default value.</param>
 		/// <returns>The value, or a default value.</returns>
-		public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key, TValue defaultValue)
+		public static TValue GetValueOrDefault<TKey, TValue>(IDictionary<TKey, TValue> dict, TKey key, TValue defaultValue)
 		{
 			TValue value;
 			return dict.TryGetValue(key, out value) ? value : defaultValue;
@@ -85,7 +85,7 @@ namespace Logos.Utility
 		/// <param name="key">The key.</param>
 		/// <param name="defaultCreator">The default value generator.</param>
 		/// <returns>The value, or a default value.</returns>
-		public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key, Func<TValue> defaultCreator)
+		public static TValue GetValueOrDefault<TKey, TValue>(IDictionary<TKey, TValue> dict, TKey key, Func<TValue> defaultCreator)
 		{
 			TValue value;
 			return dict.TryGetValue(key, out value) ? value : defaultCreator();

@@ -1,4 +1,4 @@
-namespace Logos.Utility
+namespace Logos.Utility.Basic
 {
 	/// <summary>
 	/// Provides methods for manipulating and creating hash codes.

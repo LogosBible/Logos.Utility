@@ -17,7 +17,7 @@ namespace Logos.Utility.Net
 		/// check the <see cref="HttpWebResponse.StatusCode"/> property to determine how to handle the response.
 		/// See <a href="http://code.logos.com/blog/2009/06/using_if-modified-since_in_http_requests.html">Using
 		/// If-Modified-Since in HTTP Requests</a>.</remarks>
-		public static HttpWebResponse GetHttpResponse(this HttpWebRequest request)
+		public static HttpWebResponse GetHttpResponse(HttpWebRequest request)
 		{
 			try
 			{

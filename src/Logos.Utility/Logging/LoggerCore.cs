@@ -1,3 +1,4 @@
+using Logos.Utility.Basic;
 using System;
 
 namespace Logos.Utility.Logging
@@ -71,7 +72,7 @@ namespace Logos.Utility.Logging
 		/// </summary>
 		protected void RaiseConfigurationUpdated()
 		{
-			ConfigurationUpdated.Raise(this);
+            EventHandlerUtility.Raise(ConfigurationUpdated, this);
 		}
 
 		internal event EventHandler ConfigurationUpdated;

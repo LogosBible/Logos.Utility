@@ -1,4 +1,5 @@
 ﻿
+using Logos.Utility.Basic;
 using NUnit.Framework;
 
 namespace Logos.Utility.Tests

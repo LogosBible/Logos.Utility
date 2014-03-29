@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Logos.Utility
+namespace Logos.Utility.Basic
 {
 	/// <summary>
 	/// Provides methods for manipulating delegates.

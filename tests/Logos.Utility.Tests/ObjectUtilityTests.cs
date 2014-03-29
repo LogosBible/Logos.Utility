@@ -1,6 +1,5 @@
-
 using NUnit.Framework;
-
+using Logos.Utility.Basic;
 namespace Logos.Utility.Tests
 {
 	[TestFixture]
@@ -11,7 +10,7 @@ namespace Logos.Utility.Tests
 		[TestCase(2, 2)]
 		public void GetHashCode(object obj, int hashCode)
 		{
-			Assert.That(ObjectUtility.GetHashCode(obj), Is.EqualTo(hashCode));
+			Assert.That(ObjectUtility.SafeGetHashCode<object>(obj), Is.EqualTo(hashCode));
 		}
 	}
 }

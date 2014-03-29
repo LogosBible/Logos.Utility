@@ -14,7 +14,7 @@ namespace Logos.Utility.Threading
 		/// </summary>
 		/// <param name="source">A <see cref="TaskCompletionSource{TResult}"/> that will have its Task's status set.</param>
 		/// <param name="task">The <see cref="Task{TResult}"/> that supplies the result or exception for the <see cref="TaskCompletionSource{TResult}"/>.</param>
-		public static void SetFromTask<TResult>(this TaskCompletionSource<TResult> source, Task<TResult> task)
+		public static void SetFromTask<TResult>(TaskCompletionSource<TResult> source, Task<TResult> task)
 		{
 			if (source == null)
 				throw new ArgumentNullException("source");
