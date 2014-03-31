@@ -1,6 +1,7 @@
 ﻿
 using System;
 using NUnit.Framework;
+using Logos.Utility.Basic;
 
 namespace Logos.Utility.Tests
 {
@@ -14,7 +15,7 @@ namespace Logos.Utility.Tests
 		public void RoundTrip(int year, int month, int day, int hour, int minute, int second, string iso)
 		{
 			DateTime dt = new DateTime(year, month, day, hour, minute, second, DateTimeKind.Utc);
-			Assert.That(dt.ToIso8601(), Is.EqualTo(iso));
+            Assert.That(DateTimeUtility.ToIso8601(dt), Is.EqualTo(iso));
 
 			DateTime dt2 = DateTimeUtility.ParseIso8601(iso);
 			Assert.That(dt2, Is.EqualTo(dt));

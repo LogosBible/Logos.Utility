@@ -1,4 +1,5 @@
 ﻿
+using Logos.Utility.Basic;
 using System;
 using System.Security.Permissions;
 using System.Threading;
@@ -17,7 +18,7 @@ namespace Logos.Utility.Threading
 		/// <remarks>See <a href="http://code.logos.com/blog/2008/10/using_background_processing_mode_from_c.html">Using
 		/// "Background Processing Mode" from C#</a>.</remarks>
 		[SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.ControlThread)]
-		public static Scope EnterBackgroundProcessingMode()
+		public static DisposibleObject EnterBackgroundProcessingMode()
 		{
 			Thread.BeginThreadAffinity();
 			IntPtr hThread = SafeNativeMethods.GetCurrentThread();
@@ -25,7 +26,7 @@ namespace Logos.Utility.Threading
 				Win32.THREAD_MODE_BACKGROUND_BEGIN))
 			{
 				// OS supports background processing; return Scope that exits this mode
-				return Scope.Create(() =>
+				return DisposibleObject.Create(() =>
 				{
 					UnsafeNativeMethods.SetThreadPriority(hThread, Win32.THREAD_MODE_BACKGROUND_END);
 					Thread.EndThreadAffinity();
@@ -34,7 +35,7 @@ namespace Logos.Utility.Threading
 
 			// OS doesn't support background processing mode (or setting it failed)
 			Thread.EndThreadAffinity();
-			return Scope.Empty;
+			return DisposibleObject.Empty;
 		}
 	}
 }

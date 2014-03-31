@@ -1,4 +1,5 @@
 
+using Logos.Utility.Basic;
 using System;
 
 namespace Logos.Utility.Tests
@@ -63,7 +64,7 @@ namespace Logos.Utility.Tests
 		public override int GetHashCode()
 		{
 			// combine the hash codes of the various components of this class
-			return HashCodeUtility.CombineHashCodes(ObjectUtility.GetHashCode(m_text), m_count);
+			return HashCodeUtility.CombineHashCodes(ObjectUtility.SafeGetHashCode(m_text), m_count);
 		}
 
 		/// <summary>
@@ -74,7 +75,7 @@ namespace Logos.Utility.Tests
 		/// <returns><c>true</c> if the value of <paramref name="left"/> is the same as the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
 		public static bool operator ==(EquatableClass left, EquatableClass right)
 		{
-			return ObjectImpl.OperatorEquality(left, right);
+			return ObjectUtility.SafeIsEqual(left, right);
 		}
 
 		/// <summary>
@@ -85,7 +86,7 @@ namespace Logos.Utility.Tests
 		/// <returns><c>true</c> if the value of <paramref name="left"/> is different from the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
 		public static bool operator !=(EquatableClass left, EquatableClass right)
 		{
-			return ObjectImpl.OperatorInequality(left, right);
+			return ObjectUtility.SafeIsNotEqual(left, right);
 		}
 
 		readonly string m_text;

@@ -10,7 +10,7 @@ namespace Logos.Utility.Tests
 		public void Empty()
 		{
 			// should compile and run without errors
-			using (Scope.Empty)
+            using (DisposibleObject.Empty)
 			{
 			}
 		}
@@ -19,7 +19,7 @@ namespace Logos.Utility.Tests
 		public void Create()
 		{
 			int i = 0;
-			using (Scope.Create(() => i++))
+			using (DisposibleObject.Create(() => i++))
 			{
 				Assert.That(i, Is.EqualTo(0));
 			}
@@ -30,7 +30,7 @@ namespace Logos.Utility.Tests
 		public void Cancel()
 		{
 			int i = 0;
-			using (Scope scope = Scope.Create(() => i++))
+            using (DisposibleObject scope = DisposibleObject.Create(() => i++))
 			{
 				Assert.That(i, Is.EqualTo(0));
 				scope.Cancel();
@@ -42,11 +42,11 @@ namespace Logos.Utility.Tests
 		public void Transfer()
 		{
 			int i = 0;
-			using (Scope scope = Scope.Create(() => i++))
+            using (DisposibleObject scope = DisposibleObject.Create(() => i++))
 			{
 				Assert.That(i, Is.EqualTo(0));
 
-				using (Scope transferred = scope.Transfer())
+                using (DisposibleObject transferred = scope.Transfer())
 				{
 					Assert.That(i, Is.EqualTo(0));
 				}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logos.Utility.Basic;
+using System;
 using System.Diagnostics;
 
 namespace Logos.Utility.Logging
@@ -14,9 +15,9 @@ namespace Logos.Utility.Logging
 		/// <param name="logger">The logger.</param>
 		/// <param name="message">The message.</param>
 		/// <returns>A Scope that, when disposed, logs the elapsed time.</returns>
-		public static Scope TimedWarn(this Logger logger, string message)
+		public static DisposibleObject TimedWarn(Logger logger, string message)
 		{
-			return logger.IsWarnEnabled ? TimedLog(logger.Warn, message, null) : Scope.Empty;
+			return logger.IsWarnEnabled ? TimedLog(logger.Warn, message, null) : DisposibleObject.Empty;
 		}
 
 		/// <summary>
@@ -26,9 +27,9 @@ namespace Logos.Utility.Logging
 		/// <param name="message">The message.</param>
 		/// <param name="args">The message arguments.</param>
 		/// <returns>A Scope that, when disposed, logs the elapsed time.</returns>
-		public static Scope TimedWarn(this Logger logger, string message, params object[] args)
+		public static DisposibleObject TimedWarn(Logger logger, string message, params object[] args)
 		{
-			return logger.IsWarnEnabled ? TimedLog(logger.Warn, message, args) : Scope.Empty;
+			return logger.IsWarnEnabled ? TimedLog(logger.Warn, message, args) : DisposibleObject.Empty;
 		}
 
 		/// <summary>
@@ -37,32 +38,9 @@ namespace Logos.Utility.Logging
 		/// <param name="logger">The logger.</param>
 		/// <param name="message">The message.</param>
 		/// <returns>A Scope that, when disposed, logs the elapsed time.</returns>
-		public static Scope TimedInfo(this Logger logger, string message)
+		public static DisposibleObject TimedInfo(Logger logger, string message)
 		{
-			return logger.IsInfoEnabled ? TimedLog(logger.Info, message, null) : Scope.Empty;
-		}
-
-		/// <summary>
-		/// Logs the specified message before and after an operation, displaying the elapsed time.
-		/// </summary>
-		/// <param name="logger">The logger.</param>
-		/// <param name="message">The message.</param>
-		/// <param name="args">The message arguments.</param>
-		/// <returns>A Scope that, when disposed, logs the elapsed time.</returns>
-		public static Scope TimedInfo(this Logger logger, string message, params object[] args)
-		{
-			return logger.IsInfoEnabled ? TimedLog(logger.Info, message, args) : Scope.Empty;
-		}
-
-		/// <summary>
-		/// Logs the specified message before and after an operation, displaying the elapsed time.
-		/// </summary>
-		/// <param name="logger">The logger.</param>
-		/// <param name="message">The message.</param>
-		/// <returns>A Scope that, when disposed, logs the elapsed time.</returns>
-		public static Scope TimedDebug(this Logger logger, string message)
-		{
-			return logger.IsDebugEnabled ? TimedLog(logger.Debug, message, null) : Scope.Empty;
+			return logger.IsInfoEnabled ? TimedLog(logger.Info, message, null) : DisposibleObject.Empty;
 		}
 
 		/// <summary>
@@ -72,22 +50,45 @@ namespace Logos.Utility.Logging
 		/// <param name="message">The message.</param>
 		/// <param name="args">The message arguments.</param>
 		/// <returns>A Scope that, when disposed, logs the elapsed time.</returns>
-		public static Scope TimedDebug(this Logger logger, string message, params object[] args)
+		public static DisposibleObject TimedInfo(Logger logger, string message, params object[] args)
 		{
-			return logger.IsDebugEnabled ? TimedLog(logger.Debug, message, args) : Scope.Empty;
+			return logger.IsInfoEnabled ? TimedLog(logger.Info, message, args) : DisposibleObject.Empty;
 		}
 
-		private static Scope TimedLog(Action<string> doLog, string message, object[] args)
+		/// <summary>
+		/// Logs the specified message before and after an operation, displaying the elapsed time.
+		/// </summary>
+		/// <param name="logger">The logger.</param>
+		/// <param name="message">The message.</param>
+		/// <returns>A Scope that, when disposed, logs the elapsed time.</returns>
+		public static DisposibleObject TimedDebug(Logger logger, string message)
 		{
-			string formattedMessage = args == null || args.Length == 0 ? message : message.FormatInvariant(args);
+			return logger.IsDebugEnabled ? TimedLog(logger.Debug, message, null) : DisposibleObject.Empty;
+		}
+
+		/// <summary>
+		/// Logs the specified message before and after an operation, displaying the elapsed time.
+		/// </summary>
+		/// <param name="logger">The logger.</param>
+		/// <param name="message">The message.</param>
+		/// <param name="args">The message arguments.</param>
+		/// <returns>A Scope that, when disposed, logs the elapsed time.</returns>
+		public static DisposibleObject TimedDebug(Logger logger, string message, params object[] args)
+		{
+			return logger.IsDebugEnabled ? TimedLog(logger.Debug, message, args) : DisposibleObject.Empty;
+		}
+
+		private static DisposibleObject TimedLog(Action<string> doLog, string message, object[] args)
+		{
+			string formattedMessage = args == null || args.Length == 0 ? message : StringUtility.FormatInvariant(message, args);
 			doLog("(Timed) " + formattedMessage);
 			Stopwatch stopwatch = Stopwatch.StartNew();
-			return Scope.Create(
+			return DisposibleObject.Create(
 				delegate
 				{
 					stopwatch.Stop();
 					TimeSpan elapsed = stopwatch.Elapsed;
-					doLog("({0}) {1}".FormatInvariant(TimeSpanUtility.FormatForLogging(elapsed.Ticks < 0 ? TimeSpan.Zero : elapsed), formattedMessage));
+					StringUtility.FormatInvariant("({0}) {1}", TimeSpanUtility.FormatForLogging(elapsed.Ticks < 0 ? TimeSpan.Zero : elapsed), formattedMessage);
 				});
 		}
 	}

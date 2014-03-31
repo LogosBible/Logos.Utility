@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel;
 
-namespace Logos.Utility.ComponentModel
+namespace Logos.Utility.Basic
 {
 	/// <summary>
 	/// Provides helper methods for working with <see cref="INotifyPropertyChanged"/>.
@@ -15,10 +15,9 @@ namespace Logos.Utility.ComponentModel
 		/// <param name="propertyName">The property name.</param>
 		/// <returns><c>true</c> if the property named by <paramref name="propertyName"/> has changed; otherwise <c>false</c>.</returns>
 		/// <remarks>See <a href="http://code.logos.com/blog/2008/04/handling_the_propertychanged_event.html">Handling the PropertyChanged event</a>.</remarks>
-		public static bool HasChanged(this PropertyChangedEventArgs e, string propertyName)
+		public static bool HasChanged(PropertyChangedEventArgs e, string propertyName)
 		{
-			string eventPropertyName = e.PropertyName;
-			return string.IsNullOrEmpty(eventPropertyName) || propertyName == eventPropertyName;
+            return propertyName != e.PropertyName;
 		}
 	}
 }

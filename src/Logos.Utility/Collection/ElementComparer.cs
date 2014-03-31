@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Logos.Utility
+namespace Logos.Utility.Collection
 {
 	// ElementComparer is a helper class for OrderedEnumerable that can compare items in a source array given their indexes.
 	// It supports chaining multiple comparers together to allow secondary, tertiary, etc. sorting.

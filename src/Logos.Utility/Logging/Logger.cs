@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logos.Utility.Basic;
+using System;
 
 namespace Logos.Utility.Logging
 {
@@ -165,7 +166,7 @@ namespace Logos.Utility.Logging
 			m_isWarnEnabled = m_core.IsWarnEnabled;
 			m_isErrorEnabled = m_core.IsErrorEnabled;
 
-			ConfigurationUpdated.Raise(this);
+            EventHandlerUtility.Raise(ConfigurationUpdated, this);
 		}
 
 		readonly string m_name;

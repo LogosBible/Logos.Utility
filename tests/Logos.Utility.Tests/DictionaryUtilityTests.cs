@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using NUnit.Framework;
+using Logos.Utility.Collection;
 
 namespace Logos.Utility.Tests
 {
@@ -11,7 +12,7 @@ namespace Logos.Utility.Tests
 		public void GetOrAddValueNew()
 		{
 			Dictionary<string, int> dict = new Dictionary<string, int>();
-			int i = dict.GetOrAddValue("test");
+            int i = DictionaryUtility.GetOrAddValue<string, int>(dict, "test"); 
 			Assert.That(i, Is.EqualTo(0));
 			Assert.That(dict["test"], Is.EqualTo(0));
 		}
@@ -20,7 +21,7 @@ namespace Logos.Utility.Tests
 		public void GetOrAddValueCreator()
 		{
 			Dictionary<string, int> dict = new Dictionary<string, int>();
-			int i = dict.GetOrAddValue("test", () => 1);
+            int i = DictionaryUtility.GetOrAddValue<string, int>(dict, "test",()=>1);
 			Assert.That(i, Is.EqualTo(1));
 			Assert.That(dict["test"], Is.EqualTo(1));
 		}
@@ -29,7 +30,7 @@ namespace Logos.Utility.Tests
 		public void GetValueOrDefault()
 		{
 			Dictionary<string, int> dict = new Dictionary<string, int>();
-			int i = dict.GetValueOrDefault("test");
+            int i = DictionaryUtility.GetValueOrDefault<string, int>(dict, "test");
 			Assert.That(i, Is.EqualTo(0));
 		}
 
@@ -37,7 +38,7 @@ namespace Logos.Utility.Tests
 		public void GetValueOrDefaultValue()
 		{
 			Dictionary<string, int> dict = new Dictionary<string, int>();
-			int i = dict.GetValueOrDefault("test", 1);
+            int i = DictionaryUtility.GetValueOrDefault<string, int>(dict, "test",1);
 			Assert.That(i, Is.EqualTo(1));
 		}
 
@@ -45,7 +46,7 @@ namespace Logos.Utility.Tests
 		public void GetValueOrDefaultValueCreator()
 		{
 			Dictionary<string, int> dict = new Dictionary<string, int>();
-			int i = dict.GetValueOrDefault("test", () => 1);
+            int i = DictionaryUtility.GetValueOrDefault<string, int>(dict, "test",()=>1);
 			Assert.That(i, Is.EqualTo(1));
 		}
 	}

@@ -13,7 +13,7 @@ namespace Logos.Utility.Tests
 		public void Get404Response()
 		{
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create(new Uri("http://code.logos.com/non-existent"));
-			using (HttpWebResponse response = request.GetHttpResponse())
+			using (HttpWebResponse response = HttpWebRequestUtility.GetHttpResponse(request))
 			{
 				Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
 			}
@@ -24,7 +24,7 @@ namespace Logos.Utility.Tests
 		{
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create(new Uri("http://code.logos.com/blog/blogCodeBackground.gif"));
 			request.IfModifiedSince = new DateTime(2009, 1, 1);
-			using (HttpWebResponse response = request.GetHttpResponse())
+            using (HttpWebResponse response = HttpWebRequestUtility.GetHttpResponse(request))
 			{
 				Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotModified));
 			}

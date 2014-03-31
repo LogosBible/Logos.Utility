@@ -17,7 +17,7 @@ namespace Logos.Utility.Threading
 		/// <param name="callback">The <see cref="AsyncCallback"/> supplied to the BeginXxx APM method.</param>
 		/// <param name="state">The state object supplied to the BeginXxx APM method.</param>
 		/// <returns>An <see cref="IAsyncResult"/> object that can be returned from an APM-style BeginXxx method.</returns>
-		public static IAsyncResult CreateAsyncResult<T>(this Task<T> task, AsyncCallback callback, object state)
+		public static IAsyncResult CreateAsyncResult<T>(Task<T> task, AsyncCallback callback, object state)
 		{
 			if (task == null)
 				throw new ArgumentNullException("task");
@@ -28,7 +28,7 @@ namespace Logos.Utility.Threading
 			// set the result (or failure) when the value is known
 			task.ContinueWith(t =>
 				{
-					result.SetFromTask(t);
+					TaskCompletionSourceUtility.SetFromTask(result, task);
 					if (callback != null)
 						callback(result.Task);
 				});
