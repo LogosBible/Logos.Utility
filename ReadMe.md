@@ -5,6 +5,10 @@
 This code is published by Logos Bible Software, based on articles published
 at the [Logos Code Blog](http://code.logos.com/blog/).
 
+### Build Status
+
+[![Build status](https://ci.appveyor.com/api/projects/status/k5akr20slk8ya729)](https://ci.appveyor.com/project/BradleyGrainger/logos-utility)
+
 ### License
 
 Copyright 2007-2013 Logos Bible Software
