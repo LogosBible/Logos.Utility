@@ -1,3 +1,7 @@
+properties {
+  $gitPath = "C:\Program Files (x86)\Git\bin\git.exe"
+}
+
 Task Default -depends NuGetPack
 
 Task Build {
@@ -10,10 +14,10 @@ Task Tests -depends Build {
 }
 
 Task SourceIndex -depends Tests {
-  $headSha = & git rev-parse HEAD
-  Exec { tools\SourceIndex\github-sourceindexer.ps1 -symbolsFolder src\Logos.Utility\bin\Release -userId LogosBible -repository Logos.Utility -branch $headSha -sourcesRoot ${pwd} -dbgToolsPath "C:\Program Files (x86)\Windows Kits\8.0\Debuggers\x86" -gitHubUrl "https://raw.github.com" -serverIsRaw -verbose }
+  $headSha = & $gitPath rev-parse HEAD
+  Exec { tools\SourceIndex\github-sourceindexer.ps1 -symbolsFolder src\Logos.Utility\bin\Release -userId LogosBible -repository Logos.Utility -branch $headSha -sourcesRoot ${pwd} -dbgToolsPath "C:\Program Files (x86)\Windows Kits\8.1\Debuggers\x86" -gitHubUrl "https://raw.github.com" -serverIsRaw -verbose }
 }
 
 Task NuGetPack -depends SourceIndex {
-  Exec { nuget pack src\Logos.Utility\Logos.Utility.csproj -Prop Configuration=Release -Symbols }
+  Exec { tools\NuGet\NuGet pack src\Logos.Utility\Logos.Utility.csproj -Prop Configuration=Release -Symbols }
 }
