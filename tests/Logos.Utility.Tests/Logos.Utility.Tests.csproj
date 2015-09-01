@@ -62,6 +62,7 @@
     <Compile Include="DelegateUtilityTests.cs" />
     <Compile Include="GuidUtilityTests.cs" />
     <Compile Include="OrderedEnumerableTests.cs" />
+    <Compile Include="ReadOnlyHashSetTests.cs" />
     <Compile Include="ReadOnlyStreamTests.cs" />
     <Compile Include="RebasedStreamTests.cs" />
     <Compile Include="DateTimeUtilityTests.cs" />
