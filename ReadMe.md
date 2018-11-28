@@ -1,13 +1,17 @@
+## This repository is archived
+
+This repository is not under active development; the code is made available for reference only.
+
+Similar code by the same authors is available in [FaithlifeUtility](https://github.com/Faithlife/FaithlifeUtility).
+
+[![Project Status: Abandoned – Initial development has started, but there has not yet been a stable, usable release; the project has been abandoned and the author(s) do not intend on continuing development.](https://www.repostatus.org/badges/latest/abandoned.svg)](https://www.repostatus.org/#abandoned)
+
 ## Logos.Utility
 
 ### About
 
 This code is published by Logos Bible Software, based on articles published
-at the [Logos Code Blog](http://code.logos.com/blog/).
-
-### Build Status
-
-[![Build status](https://ci.appveyor.com/api/projects/status/k5akr20slk8ya729)](https://ci.appveyor.com/project/BradleyGrainger/logos-utility)
+at the [Logos Code Blog](https://faithlife.codes/blog/).
 
 ### License
 
