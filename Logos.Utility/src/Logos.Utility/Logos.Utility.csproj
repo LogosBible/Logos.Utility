@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>.NET Standard version of Logos Bible Software Utility Library</Description>
+    <Copyright>Copyright 2007-2013 Logos Bible Software</Copyright>
+    <Company>Logos Bible Software</Company>
+    <Authors>Logos Bible Software and Kyle Kilpatrick</Authors>
+    <PackageLicenseUrl>https://github.com/RedZone908/Logos.Utility/blob/master/ReadMe.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/RedZone908/Logos.Utility</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RedZone908/Logos.Utility</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageReleaseNotes>Identical to Logos Bible Software's original product apart from the migration to .NET Standard</PackageReleaseNotes>
+    <AssemblyName>Logos.Utility</AssemblyName>
+    <PackageId>Logos.Utility.NetStandard</PackageId>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
