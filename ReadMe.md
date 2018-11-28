@@ -1,11 +1,14 @@
 ## Logos.Utility
 
 ### About
+This is a .NET Standard port of the Logos.Utility library. This port was not done by Logos Bible Software but, all the code contained therein is Logos Bible Software's original unmodified code. The only changes are the style and target of the project files (.NET Standard instead of the full .NET framework).
 
-This code is published by Logos Bible Software, based on articles published
+Additionally, the unit tests have been converted to .NET Core and upgraded to use NUnit 3 (Logos Bible Software's original version used NUnit2). NUnit 3's changed syntax for "expected exceptions" required exception-based tests to be updated.
+
+The original version of this code was published by Logos Bible Software, based on articles published
 at the [Logos Code Blog](http://code.logos.com/blog/).
 
-### Build Status
+### Build Status (original version)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/k5akr20slk8ya729)](https://ci.appveyor.com/project/BradleyGrainger/logos-utility)
 
